@@ -4,7 +4,7 @@ export const homeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getHomeMetrics: builder.query({
       query: () => ({
-        url: "/home-sections",
+        url: "/home-metrics",
         method: "GET",
       }),
       providesTags: ["HomeApi"],

@@ -25,7 +25,7 @@ Follow these steps to get the project running locally:
 ### 1. Clone the Repository
 ```bash
 # 1. Clone the repository
-git clone https://github.com/mrjisan12/DownTown-Properties-Ltd-Frontend.git
+git clone https://github.com/FardinCSE25/ilabs360-frontend-react
 cd DownTown-Properties-Ltd-Frontend
 
 # 2. Install dependencies using Bun
