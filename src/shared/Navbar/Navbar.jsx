@@ -4,16 +4,18 @@ import {
   Phone,
   X,
   ArrowRight,
-  ExternalLink,
   Instagram,
   Facebook,
   Twitter,
   Linkedin,
   Youtube,
   Menu,
+  Mail,
+  MapPin,
+  Sparkles,
+  ChevronRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../../assets/Downtown LTD Logo.png";
 import SupportModal from "@/components/supportModal/supportModal";
 
 const navItems = [
@@ -26,13 +28,12 @@ const navItems = [
 ];
 
 const platformIcons = {
-  instagram: <Instagram size={20} />,
-  facebook: <Facebook size={20} />,
-  twitter: <Twitter size={20} />,
-  linkedin: <Linkedin size={20} />,
-  youtube: <Youtube size={20} />,
-  whatsapp: <Phone size={20} />,
-  default: <ExternalLink size={20} />,
+  instagram: <Instagram size={18} />,
+  facebook: <Facebook size={18} />,
+  twitter: <Twitter size={18} />,
+  linkedin: <Linkedin size={18} />,
+  youtube: <Youtube size={18} />,
+  whatsapp: <Phone size={18} />,
 };
 
 const Navbar = ({ socialLinks = [], settingData }) => {
@@ -41,20 +42,20 @@ const Navbar = ({ socialLinks = [], settingData }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [callOpen, setCallOpen] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState(null);
 
   const location = useLocation();
   const projectMatch = useMatch("/project/:id");
-  const isHome = location.pathname === "/";
 
   const getPlatformIcon = (platform) => {
     const key = platform?.toLowerCase();
-    return platformIcons[key] || platformIcons.default;
+    return platformIcons[key] || <div className="w-4 h-4" />;
   };
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 80);
+      setIsScrolled(currentScrollY > 50);
 
       if (currentScrollY < 50) {
         setIsVisible(true);
@@ -75,203 +76,497 @@ const Navbar = ({ socialLinks = [], settingData }) => {
       <SupportModal
         isOpen={callOpen}
         onClose={() => setCallOpen(false)}
-        phoneNumber={settingData?.data[0].primary_phone || "01872175065"}
+        phoneNumber={settingData?.data[0]?.primary_phone || "01872175065"}
       />
 
-      <div className="fixed hidden lg:block top-0 left-0 w-full z-50 bg-background shadow-md">
-  {/* Top Info Bar */}
-  <div className="w-full hidden md:flex justify-between items-center bg-secondary shadow-sm">
-    {/* Invisible Developer Credit (Kept as per your original structure) */}
-    <div className="text-secondary text-[2px] select-none pointer-events-none">
-      This website is developed by Eshrak
-    </div>
+      {/* Animated Top Bar with Particle Effect */}
+      <motion.div
+        initial={{ y: -40 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 left-0 w-full z-[100] bg-gradient-to-r from-primary/10 via-background to-primary/10 backdrop-blur-sm border-b border-primary/10"
+      >
+        <div className="max-w-[1800px] mx-auto px-6 py-2">
+          <div className="flex items-center justify-between text-sm">
+            {/* Left - Contact Info with Animation */}
+            <div className="flex items-center gap-6">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-2 group"
+              >
+                <div className="p-1.5 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
+                  <Phone size={14} className="text-primary" />
+                </div>
+                <a
+                  href="tel:+8801670988233"
+                  className="text-foreground/80 hover:text-primary transition-colors"
+                >
+                  +88‭01521-498303‬
+                </a>
+              </motion.div>
 
-    {/* Content Container */}
-    <div className="text-white px-6 py-2 flex justify-between items-center w-480 mx-auto">
-      <div className="flex gap-8 font-semibold">
-        {/* Contact Info */}
-        <p className="text-sm flex items-center gap-2">
-          <span className="opacity-80 font-normal">Contact:</span>{" "}
-          <a 
-            href="tel:+8801670988233" 
-            className="hover:text-primary transition-colors duration-200"
-          >
-            +88‭01670988233‬
-          </a>
-        </p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-2 group"
+              >
+                <div className="p-1.5 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
+                  <Mail size={14} className="text-primary" />
+                </div>
+                <a
+                  href="mailto:support@electron-bd.com"
+                  className="text-foreground/80 hover:text-primary transition-colors"
+                >
+                  ilabs360@gmail.com
+                </a>
+              </motion.div>
+            </div>
 
-        {/* Email Info */}
-        <p className="text-sm flex items-center gap-2">
-          <span className="opacity-80 font-normal">Email:</span>{" "}
-          <a
-            href="mailto:support@electron-bd.com"
-            className="hover:text-primary transition-colors duration-200"
-          >
-            support@electron-bd.com
-          </a>
-        </p>
-      </div>
+            {/* Right - Social & Tagline */}
+            <div className="flex items-center gap-4">
+              <motion.p
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="text-xs font-medium text-foreground/60 hidden md:block"
+              >
+                <Sparkles size={12} className="inline mr-2 text-primary" />
+                Innovative Solutions for Tomorrow
+              </motion.p>
+              <div className="h-4 w-px bg-primary/20" />
+              <div className="flex gap-3">
+                {socialLinks.slice(0, 4).map((social, index) => (
+                  <motion.a
+                    key={social.id}
+                    href={social.url}
+                    initial={{ scale: 0, rotate: -90 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    className="p-1.5 rounded-full bg-primary/5 hover:bg-primary/10 text-foreground/60 hover:text-primary transition-all"
+                  >
+                    {getPlatformIcon(social.platform)}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
-      {/* Social Icons */}
-      <div className="flex gap-5 pl-6">
-        <p className="border-r pr-5 font-extralight border-white">
-          We are creative, ambitious and ready for challenges!
-        </p>
-        <a
-          href="https://www.facebook.com/share/1FW5KgrJBQ/"
-          aria-label="Facebook"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white hover:text-primary transition-all duration-200 hover:scale-110"
-        >
-          <Facebook/>
-        </a>
-        <a
-          href="https://www.linkedin.com/company/eepsbd"
-          aria-label="LinkedIn"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white hover:text-primary transition-all duration-200 hover:scale-110"
-        >
-          <Linkedin/>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  {/* Main Navbar section will follow here */}
-</div>
-
+      {/* Main Navbar with Animated iLabs360 Logo */}
       <motion.nav
-        initial={{ y: 0 }}
+        initial={{ y: -100 }}
         animate={{ y: isVisible ? 0 : -100 }}
-        transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[70] mt-6 transition-all duration-300 ${
-          isScrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
+        transition={{ 
+          duration: 0.6, 
+          ease: [0.23, 1, 0.32, 1],
+          type: "spring",
+          stiffness: 100,
+          damping: 20
+        }}
+        className={`fixed top-10 left-0 right-0 z-[90] transition-all duration-500 ${
+          isScrolled 
+            ? "bg-white/95 backdrop-blur-md shadow-2xl shadow-primary/10 py-2" 
+            : "bg-transparent py-4"
         }`}
       >
-        <div className="max-w-[1900px] mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-          
-          {/* 1. LOGO (Left) */}
-          <div className="flex-shrink-0 w-40">
-            <NavLink to="/">
-              <img
-                src={logo}
-                alt="Logo"
-                className={`h-10 md:h-14 w-auto transition-all ${
-                  isScrolled ? "brightness-100" : "drop-shadow-md"
-                }`}
-              />
-            </NavLink>
-          </div>
-
-          {/* 2. DESKTOP NAV (Center) - Hidden on Mobile */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => {
-               const isActive = location.pathname === item.path || (item.path === "/projects" && projectMatch);
-               return (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={`text-sm uppercase tracking-widest font-bold transition-colors ${
-                    isActive 
-                      ? "text-primary border-b-2 border-primary" 
-                      : isScrolled ? "text-secondary hover:text-primary" : "text-secondary"
-                  }`}
-                >
-                  {item.label}
-                </NavLink>
-               )
-            })}
-          </div>
-
-          {/* 3. RIGHT SECTION (Call Button or Hamburger) */}
-          <div className="flex items-center justify-end w-40">
-            {/* Desktop Call Button - Hidden on Mobile */}
-            <button
-              onClick={() => setCallOpen(true)}
-              className={`hidden lg:flex btn items-center gap-2 px-4 py-4 rounded-full font-bold transition-all transform hover:scale-105 active:scale-95 ${
-                isScrolled ? "bg-primary text-white" : "bg-primary text-primary"
-              }`}
+        <div className="max-w-[1700px] mx-auto px-6">
+          <div className="flex items-center justify-between h-20">
+            {/* Animated iLabs360 Logo */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="relative group"
             >
-              <Phone size={16} className="text-white" />
-              <span className="text-xs text-white uppercase">Call Now</span>
-            </button>
+              <NavLink to="/" className="relative block">
+                {/* Glow Effect */}
+                <motion.div
+                  animate={{ 
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.05, 1]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute -inset-4 bg-primary/10 blur-xl rounded-2xl -z-10"
+                />
+                
+                {/* Logo Container */}
+                <div className="relative flex items-center gap-3">
+                  {/* Animated 'i' Character */}
+                  <motion.div
+                    animate={{ 
+                      y: [0, -4, 0],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="relative"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center">
+                      <span className="text-primary-foreground font-black text-lg">i</span>
+                    </div>
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.5, 1],
+                        opacity: [0.5, 0.8, 0.5]
+                      }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 0.5
+                      }}
+                      className="absolute top-0 right-0 w-2 h-2 rounded-full bg-primary blur-sm"
+                    />
+                  </motion.div>
 
-            {/* Mobile Hamburger - Hidden on Desktop */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                isScrolled ? "text-primary bg-gray-100" : "text-white bg-white/10"
-              }`}
-            >
-              <Menu size={28} />
-            </button>
+                  {/* 'Labs' Text */}
+                  <div className="relative">
+                    <motion.span
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="text-3xl md:text-4xl font-black tracking-tighter bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent"
+                    >
+                      Labs
+                    </motion.span>
+                    
+                    {/* Animated Underline */}
+                    <motion.div
+                      animate={{ width: ["0%", "100%", "0%"] }}
+                      transition={{ 
+                        duration: 3, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary"
+                    />
+                  </div>
+
+                  {/* '360' Badge */}
+                  <motion.div
+                    animate={{ 
+                      rotate: [0, 360],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{ 
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                    className="relative"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-primary/30 flex items-center justify-center border border-primary/20">
+                      <span className="text-lg font-black text-primary">360°</span>
+                    </div>
+                    <motion.div
+                      animate={{ rotate: -360 }}
+                      transition={{ 
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                      className="absolute inset-0 rounded-full border border-primary/30 border-dashed"
+                    />
+                  </motion.div>
+                </div>
+              </NavLink>
+            </motion.div>
+
+            {/* Desktop Navigation with Hover Effects */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navItems.map((item, index) => {
+                const isActive = location.pathname === item.path || 
+                               (item.path === "/projects" && projectMatch);
+                return (
+                  <motion.div
+                    key={item.path}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    onMouseEnter={() => setHoveredNav(index)}
+                    onMouseLeave={() => setHoveredNav(null)}
+                    className="relative"
+                  >
+                    <NavLink
+                      to={item.path}
+                      className={`
+                        relative px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-all duration-300
+                        ${isActive 
+                          ? "text-primary" 
+                          : isScrolled 
+                            ? "text-foreground/70 hover:text-primary" 
+                            : "text-foreground/80 hover:text-primary"
+                        }
+                      `}
+                    >
+                      {item.label}
+                      
+                      {/* Hover/Active Indicator */}
+                      <motion.div
+                        initial={false}
+                        animate={{ 
+                          width: hoveredNav === index || isActive ? "100%" : "0%",
+                          opacity: hoveredNav === index || isActive ? 1 : 0
+                        }}
+                        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
+                      />
+                      
+                      {/* Glowing Dot for Active */}
+                      {isActive && (
+                        <motion.div
+                          animate={{ 
+                            scale: [1, 1.5, 1],
+                            opacity: [0.5, 1, 0.5]
+                          }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity 
+                          }}
+                          className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary blur-sm"
+                        />
+                      )}
+                    </NavLink>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* CTA Button with Animation */}
+            <div className="flex items-center gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setCallOpen(true)}
+                className={`
+                  hidden lg:flex items-center gap-2 px-6 py-3 rounded-full font-bold 
+                  transition-all duration-300 relative overflow-hidden group
+                  ${isScrolled 
+                    ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30" 
+                    : "bg-gradient-to-r from-primary/90 to-secondary/90 text-white shadow-xl shadow-primary/40"
+                  }
+                `}
+              >
+                {/* Button Shine Effect */}
+                <motion.div
+                  initial={{ x: "-100%", y: "-100%" }}
+                  whileHover={{ x: "100%", y: "100%" }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                />
+                
+                <Phone size={18} className="relative z-10" />
+                <span className="relative z-10 text-sm uppercase tracking-wider">
+                  Get Quote
+                </span>
+                
+                {/* Pulsing Animation */}
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.5, 0.8, 0.5]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity 
+                  }}
+                  className="absolute inset-0 rounded-full border-2 border-primary/30"
+                />
+              </motion.button>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsOpen(true)}
+                className={`
+                  lg:hidden p-3 rounded-xl transition-all duration-300 relative overflow-hidden
+                  ${isScrolled 
+                    ? "bg-primary/10 text-primary" 
+                    : "bg-primary/20 text-primary"
+                  }
+                `}
+              >
+                <Menu size={24} />
+                {/* Dot Indicator */}
+                <motion.div
+                  animate={{ scale: [0.8, 1.2, 0.8] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="absolute top-1 right-1 w-2 h-2 rounded-full bg-secondary"
+                />
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* MOBILE SIDEBAR MENU */}
+      {/* Enhanced Mobile Sidebar Menu */}
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Backdrop with Blur */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 z-[80] backdrop-blur-sm"
+              className="fixed inset-0  z-[95] backdrop-blur-md"
               onClick={() => setIsOpen(false)}
             />
+            
+            {/* Sidebar */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-screen w-[85%] max-w-[400px] bg-white z-[90] p-8 flex flex-col shadow-2xl"
+              transition={{ 
+                type: "spring", 
+                damping: 25, 
+                stiffness: 200,
+                mass: 0.8 
+              }}
+              className="fixed top-0 right-0 h-screen w-[90%] max-w-md bg-gradient-to-b from-background via-background to-primary/5 z-[100] p-8 flex flex-col shadow-2xl shadow-primary/20"
             >
-              <div className="flex justify-between items-center mb-10">
-                <span className="text-primary font-black uppercase tracking-widest">Menu</span>
-                <button onClick={() => setIsOpen(false)} className="p-2 text-secondary">
-                  <X size={30} />
-                </button>
+              {/* Header */}
+              <div className="flex justify-between items-center mb-12 pt-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                    <span className="text-primary-foreground font-black text-xl">i</span>
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                      iLabs360
+                    </h2>
+                    <p className="text-xs text-foreground/60">Navigation</p>
+                  </div>
+                </div>
+                <motion.button
+                  whileHover={{ rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                >
+                  <X size={28} />
+                </motion.button>
               </div>
 
-              <nav className="flex flex-col gap-4">
-                {navItems.map((item, index) => (
-                  <NavLink
-                    key={item.path}
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
-                    className={({ isActive }) => `
-                      text-3xl font-light tracking-tight flex justify-between items-center py-2
-                      ${isActive ? "text-primary font-bold" : "text-secondary/70"}
-                    `}
-                  >
-                    {item.label}
-                    <ArrowRight size={20} className="text-primary opacity-50" />
-                  </NavLink>
-                ))}
+              {/* Navigation Links with Animation */}
+              <nav className="flex flex-col gap-2 flex-1">
+                {navItems.map((item, index) => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <motion.div
+                      key={item.path}
+                      initial={{ x: 50, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <NavLink
+                        to={item.path}
+                        onClick={() => setIsOpen(false)}
+                        className={`
+                          flex items-center justify-between p-4 rounded-xl transition-all duration-300 group
+                          ${isActive 
+                            ? "bg-gradient-to-r from-primary/10 to-secondary/10 border-l-4 border-primary" 
+                            : "hover:bg-primary/5"
+                          }
+                        `}
+                      >
+                        <div className="flex items-center gap-4">
+                          <motion.div
+                            animate={{ 
+                              rotate: isActive ? 360 : 0,
+                              scale: isActive ? 1.2 : 1
+                            }}
+                            className={`p-2 rounded-lg ${isActive ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}`}
+                          >
+                            <ChevronRight size={18} />
+                          </motion.div>
+                          <span className={`text-xl font-semibold ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                            {item.label}
+                          </span>
+                        </div>
+                        {isActive && (
+                          <motion.div
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                            className="w-2 h-2 rounded-full bg-secondary"
+                          />
+                        )}
+                      </NavLink>
+                    </motion.div>
+                  );
+                })}
               </nav>
 
-              <div className="mt-auto">
-                <button
-                  onClick={() => {setIsOpen(false); setCallOpen(true);}}
-                  className="w-full bg-primary text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold mb-6"
+              {/* Contact Section */}
+              <div className="mt-6 space-y-6">
+                {/* Contact Button */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setCallOpen(true);
+                  }}
+                  className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold relative overflow-hidden group"
                 >
-                  <Phone size={20} /> CONTACT SUPPORT
-                </button>
+                  {/* Shine Effect */}
+                  <motion.div
+                    initial={{ x: "-100%", y: "-100%" }}
+                    whileHover={{ x: "100%", y: "100%" }}
+                    transition={{ duration: 0.8 }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  />
+                  <Phone size={22} className="relative z-10" />
+                  <span className="relative z-10">GET IMMEDIATE SUPPORT</span>
+                </motion.button>
+
+                {/* Social Links */}
                 <div className="flex justify-center gap-4">
-                  {socialLinks.map((social) => (
-                    <a key={social.id} href={social.url} className="p-2 bg-secondary/10 rounded-lg text-secondary">
+                  {socialLinks.map((social, index) => (
+                    <motion.a
+                      key={social.id}
+                      href={social.url}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.5 + (index * 0.1) }}
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      className="p-3 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 text-foreground hover:text-primary transition-all"
+                    >
                       {getPlatformIcon(social.platform)}
-                    </a>
+                    </motion.a>
                   ))}
+                </div>
+
+                {/* Quick Contact Info */}
+                <div className="text-center text-sm text-foreground/60 space-y-2">
+                  <p>Available 24/7 for your projects</p>
+                  <p className="text-xs">Call: +88‭01521-498303‬</p>
                 </div>
               </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
+
+      {/* Floating Contact Button for Mobile */}
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1 }}
+        onClick={() => setCallOpen(true)}
+        className="fixed bottom-6 right-6 lg:hidden z-[85] p-4 bg-gradient-to-r from-primary to-secondary rounded-full shadow-2xl shadow-primary/40"
+      >
+        <Phone size={24} className="text-white" />
+        <motion.div
+          animate={{ scale: [1, 1.5, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute inset-0 rounded-full border-2 border-white/30"
+        />
+      </motion.button>
     </>
   );
 };
