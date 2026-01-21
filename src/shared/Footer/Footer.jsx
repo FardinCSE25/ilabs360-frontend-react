@@ -1,189 +1,193 @@
-// import {
-//   Phone,
-//   Mail,
-//   MapPin,
-//   ArrowRight,
-//   Home,
-//   Building,
-//   Compass,
-//   MessageCircle,
-// } from "lucide-react";
-// import { NavLink } from "react-router-dom";
-// import { useGetSettingsQuery } from "@/redux/api/homeApi";
-// import FooterSkeletons from "@/components/skeletons/footerSkeletons";
+import GradientIcon from "@/components/GradientIcon/GradientIcon";
+import {
+  faFacebook,
+  faLinkedin,
+  faYoutube,
+  faInstagram,
+  faTwitter,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router";
 
-// const Footer = ({ socialLinks = [] }) => {
-//   const { data, isLoading, error } = useGetSettingsQuery();
+const Footer = ({ data, socialLinksData }) => {
+  const socialLinksArray = socialLinksData?.data;
 
-//   const sortedSocialLinks = [...socialLinks].sort(
-//     (a, b) => a.position - b.position
-//   );
+  const iconMap = [faFacebook, faYoutube, faInstagram, faLinkedin, faTwitter];
 
-//   if (isLoading || error) return <FooterSkeletons />;
+  return (
+    <footer className="bg-secondary text-primary-foreground">
+      {/* Container */}
+      <div className="max-w-full lg:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto md:px-8 lg:px-12 p-8">
+        {/* Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16">
+          {/* Head Office */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-primary">Head Office</h3>
+            <ul className="space-y-2">
+              <li className="flex items-start">
+                <GradientIcon id="location">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </GradientIcon>
+                <span className="text-secondary-foreground/80">
+                  {data.address}
+                </span>
+              </li>
+              <li className="flex items-center text-secondary-foreground/80">
+                <GradientIcon id="phone">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h2.28a2 2 0 011.94 1.515l.516 2.064a2 2 0 01-.45 1.958l-1.27 1.27a11.042 11.042 0 005.292 5.292l1.27-1.27a2 2 0 011.958-.45l2.064.516A2 2 0 0121 16.72V19a2 2 0 01-2 2h-1C7.163 21 3 16.837 3 11V5z"
+                  />
+                </GradientIcon>
+                {data.primary_phone}
+              </li>
+              <li className="flex items-center text-secondary-foreground/80">
+                <GradientIcon id="email">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </GradientIcon>
+                {data.primary_email}
+              </li>
+            </ul>
+          </div>
 
-//   const footerData = data?.data?.[0];
-//   if (!footerData) return null;
+          {/* About Company */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-primary">
+              Our Services
+            </h3>
+            <p className="text-secondary-foreground/70 mb-3">
+              Your one-stop solution for all digital needs - from stunning
+              visuals to cutting-edge technology solutions that amplify your
+              online presence.
+            </p>
+            <div className="flex space-x-4 mt-4">
+              {socialLinksArray?.map((link, idx) => (
+                <Link
+                  key={idx}
+                  to={`${link.url}`}
+                  className="text-primary hover:text-primary/70 transition-transform hover:scale-110"
+                >
+                  <FontAwesomeIcon icon={iconMap[idx]} size="lg" />
+                </Link>
+              ))}
+            </div>
+          </div>
 
-//   const quickLinks = [
-//     { name: "Home", path: "/", icon: <Home size={14} /> },
-//     { name: "About", path: "/about", icon: <Compass size={14} /> },
-//     { name: "Projects", path: "/projects", icon: <Building size={14} /> },
-//     { name: "Gallery", path: "/gallery" },
-//     { name: "Contact", path: "/contact", icon: <MessageCircle size={14} /> },
-//   ];
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-primary">Quick Links</h3>
+            <ul className="space-y-2">
+              {[
+                { name: "Home", path: "/" },
+                { name: "About Us", path: "/about" },
+                { name: "Contact", path: "/contact" },
+                { name: "Privacy Policy", path: "/privacy" },
+                { name: "Terms of Service", path: "/terms" },
+              ].map((item, index) => (
+                <li key={index}>
+                  <Link
+                    to={item.path}
+                    className="text-secondary-foreground/80 hover:text-primary transition-colors flex items-center group"
+                  >
+                    <svg
+                      className="w-4 h-4 mr-2 text-primary group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-//   return (
-//     <footer className="relative bg-linear-to-b from-secondary to-gray-900 text-slate-300  overflow-hidden">
-//       {/* Decorative Top Border */}
-//       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent" />
+          {/* Work Hours */}
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-primary">Work Hours</h3>
+            <p className="text-secondary-foreground/70 mb-3">
+              We're available 24/7 to serve you. Let's discuss your project over
+              a virtual coffee!
+            </p>
+            <div className="bg-white/5 p-4 rounded-lg border border-primary/20">
+              <p className="text-primary font-medium text-sm">
+                Need immediate assistance?
+              </p>
+              <a
+                href="tel:+8801521498303"
+                className="text-secondary-foreground hover:text-primary text-lg font-semibold transition-colors"
+              >
+                {data.primary_phone}
+              </a>
+            </div>
+          </div>
+        </div>
 
-//       <div className="max-w-7xl mx-auto px-6 py-16 relative z-10">
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-//           {/* Company Info */}
-//           <div className="space-y-6">
-//             <div className="flex items-center gap-3">
-//               <img
-//                 src={footerData.logo}
-//                 alt={footerData.site_name}
-//                 className="h-14 w-auto object-contain"
-//               />
-//               <div className="flex flex-col border-l border-primary/30 pl-3">
-//                 <span className="text-xl font-bold text-white">
-//                   {footerData.site_name}
-//                 </span>
-//                 <span className="text-xs text-primary font-medium italic">
-//                   Turning Dreams into Addresses
-//                 </span>
-//               </div>
-//             </div>
+        {/* Bottom Section */}
+        <div className="mt-12 border-t border-primary/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+          <div className="text-center md:text-left mb-4 md:mb-0">
+            <p className="text-secondary-foreground/50">
+              © {new Date().getFullYear()} InnovationLabs360. All rights
+              reserved.
+            </p>
+          </div>
 
-//             <p className="text-sm leading-relaxed text-slate-400">
-//               {footerData.site_tagline ||
-//                 "Where every home tells a story, and every property becomes a legacy."}
-//             </p>
+          <div className="flex space-x-6">
+            {["Privacy Policy", "Terms of Service", "Contact Us"].map(
+              (text) => (
+                <Link
+                  key={text}
+                  to={`/${text.toLowerCase().replace(" ", "-")}`}
+                  className="text-secondary-foreground/50 hover:text-primary transition-colors"
+                >
+                  {text}
+                </Link>
+              ),
+            )}
+          </div>
 
-//             {/* Simple Social Links */}
-//             <div className="flex flex-wrap items-center gap-3">
-//               {sortedSocialLinks.map((social) => (
-//                 <a
-//                   key={social.id}
-//                   href={social.url}
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                   className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-primary hover:border-primary transition-all duration-300 group"
-//                   title={social.platform}
-//                 >
-//                   <img
-//                     src={social.icon}
-//                     alt={social.platform}
-//                     className="h-5 w-5 invert opacity-70 group-hover:opacity-100 transition-opacity"
-//                   />
-//                 </a>
-//               ))}
-//             </div>
-//           </div>
+          <div className="mt-4 md:mt-0 text-secondary-foreground/40">
+            <p>
+              Developed with ❤️ by{" "}
+              <Link
+                to="/dashboard"
+                className="text-primary hover:underline font-medium"
+                target="_blank"
+              >
+                Our Web Team
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-//           {/* Quick Links */}
-//           <div>
-//             <h3 className="text-white font-bold text-lg mb-6 border-b border-primary/20 pb-2 inline-block">
-//               Navigation
-//             </h3>
-//             <ul className="space-y-2">
-//               {quickLinks.map((link) => (
-//                 <li key={link.name}>
-//                   <NavLink
-//                     to={link.path}
-//                     className="flex items-center gap-2 py-1 text-slate-400 hover:text-primary transition-all duration-300 group"
-//                   >
-//                     <ArrowRight
-//                       size={12}
-//                       className="opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0"
-//                     />
-//                     <span>{link.name}</span>
-//                   </NavLink>
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-
-//           {/* Services */}
-//           <div>
-//             <h3 className="text-white font-bold text-lg mb-6 border-b border-primary/20 pb-2 inline-block">
-//               Our Expertise
-//             </h3>
-//             <ul className="space-y-4">
-//               {[
-//                 "Residential Apartments",
-//                 "Commercial Space",
-//                 "Land Development",
-//                 "Property Consultancy",
-//               ].map((service) => (
-//                 <li key={service} className="text-sm text-slate-400">
-//                   {service}
-//                 </li>
-//               ))}
-//             </ul>
-//           </div>
-
-//           {/* Contact Info */}
-//           <div>
-//             <h3 className="text-white font-bold text-lg mb-6 border-b border-primary/20 pb-2 inline-block">
-//               Get In Touch
-//             </h3>
-//             <div className="space-y-5">
-//               {[
-//                 { icon: <MapPin size={18} />, text: footerData.address },
-//                 { icon: <Phone size={18} />, text: footerData.primary_phone },
-//                 { icon: <Mail size={18} />, text: footerData.primary_email },
-//               ].map((item, idx) => (
-//                 <div key={idx} className="flex items-start gap-4 group">
-//                   <div className="text-primary mt-1">{item.icon}</div>
-//                   <p className="text-sm text-slate-400 group-hover:text-slate-200 transition-colors">
-//                     {item.text}
-//                   </p>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Bottom Bar */}
-//       <div className="border-t border-white/5 bg-black/20">
-//         <div className="max-w-7xl mx-auto px-6 py-8">
-//           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500">
-//             <p>
-//               © {new Date().getFullYear()} {footerData.site_name}. All rights
-//               reserved.
-//             </p>
-
-//             {/* Credits Section */}
-//             <div className="flex items-center gap-1">
-//               <span>Design & Development by</span>
-//               <a
-//                 href="https://ilabs360.com/"
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="text-primary hover:underline font-medium transition-all"
-//               >
-//                 Innovation Lab 360
-//               </a>
-//             </div>
-
-//             <div className="flex items-center gap-6">
-//               <a href="/privacy" className="hover:text-white transition-colors">
-//                 Privacy
-//               </a>
-//               <a href="/terms" className="hover:text-white transition-colors">
-//                 Terms
-//               </a>
-//             </div>
-//           </div>
-//               <span className="text-[8px] text-[#071636] ">Eshrak</span>{" "}
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// };
-
-// export default Footer;
+export default Footer;

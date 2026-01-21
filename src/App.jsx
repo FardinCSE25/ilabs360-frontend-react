@@ -1,19 +1,17 @@
 import { Outlet } from "react-router";
 import Navbar from "./shared/Navbar/Navbar";
-// import Footer from "./shared/Footer/Footer";
-// import {
-//   useGetSettingsQuery,
-//   useGetSocialLinksQuery,
-// } from "./redux/api/homeApi";
 import PageLoader from "./components/pageLoader/pageLoader";
+import Footer from "./shared/Footer/Footer";
+import { useGetSettingsDataQuery, useGetSocialLinksQuery } from "./redux/api/homeApi";
 
 const App = () => {
-  // const { data: socialLinksData } = useGetSocialLinksQuery();
-  // const { data: settingData, isLoading: settingDataLoading } =
-  //   useGetSettingsQuery();
+  const { data: footerData, isLoading: footerLoading } =
+    useGetSettingsDataQuery();
+  const { data: socialLinksData, isLoading: socialLinksLoading } =
+    useGetSocialLinksQuery();
 
-  // ALWAYS ARRAY
-  // const socialLinks = socialLinksData?.data || [];
+  const data = footerData?.data[0] || [];
+  // console.log(data);
 
   return (
     <div className="mx-auto min-h-screen flex flex-col">
@@ -27,7 +25,7 @@ const App = () => {
         <Outlet />
       </main>
 
-      {/* <Footer socialLinks={socialLinks} /> */}
+      <Footer data={data} socialLinksData={socialLinksData} />
     </div>
   );
 };
