@@ -1,0 +1,43 @@
+import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const HomeServiceSkeleton = ({services}) => {
+    console.log(services);
+    
+  return (
+    <section
+      className="py-24"
+      style={{
+        "--skeleton": "oklch(91.424% 0.01108 235.152)", // light gray
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Section Title Skeleton */}
+        <div className="text-center mb-16 space-y-6">
+          <Skeleton className="h-10 w-72 mx-auto bg-[var(--skeleton)]" />
+          <Skeleton className="h-1.5 w-24 mx-auto rounded-full bg-[var(--skeleton)]" />
+        </div>
+
+        {/* Cards Skeleton Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-center justify-center p-10 bg-gray-50 border border-gray-200 rounded-2xl"
+            >
+              {/* Icon Skeleton */}
+              <div className="mb-6">
+                <Skeleton className="w-20 h-20 rounded-2xl bg-[var(--skeleton)]" />
+              </div>
+
+              {/* Title Skeleton */}
+              <Skeleton className="h-6 w-40 bg-[var(--skeleton)]" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HomeServiceSkeleton;

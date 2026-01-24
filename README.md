@@ -27,6 +27,19 @@ Follow these steps to get the project running locally:
 # 1. Clone the repository
 git clone https://github.com/FardinCSE25/ilabs360-frontend-react
 admin http://192.168.10.33:8000
+
+  /* CTA Button
+            <div className="pt-6">
+              <button className="group relative w-full lg:w-max bg-primary text-primary-foreground px-10 py-5 rounded-xl font-bold uppercase tracking-widest overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(var(--primary),0.4)]">
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  <Headphones className="w-5 h-5" />
+                  Get Premium Support
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </button>
+            </div> */
+
 cd DownTown-Properties-Ltd-Frontend
 
 # 2. Install dependencies using Bun

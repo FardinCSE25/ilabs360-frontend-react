@@ -57,6 +57,8 @@
 
     /* Primary: #5fc9f3 (Sky Blue) */
     --primary: oklch(0.78 0.12 235.5);
+    --skeleton:oklch(91.424% 0.01108 235.152);
+
     --primary-foreground: oklch(0.2 0.05 235.5); /* Dark text for light primary */
 
     /* Secondary: #1e549f (Royal Blue) */

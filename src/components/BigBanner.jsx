@@ -15,7 +15,6 @@ const BigBanner = ({ images = [], loading = false }) => {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 45,
     damping: 30,
