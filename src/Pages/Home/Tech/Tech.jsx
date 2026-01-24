@@ -67,7 +67,9 @@ const Tech = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <Title name="Our Technologies" />
+          <div className="-mb-9">
+            <Title name="Our Technologies" />
+          </div>
 
           <motion.div
             className="flex flex-wrap justify-center gap-3 p-4 mb-16"
