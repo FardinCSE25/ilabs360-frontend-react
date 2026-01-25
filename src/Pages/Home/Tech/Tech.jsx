@@ -40,8 +40,8 @@ const Tech = () => {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-screen">
-      <div className="absolute inset-0 z-0">
+    <section className="relative overflow-hidden">
+      {/* <div className="absolute inset-0 z-0">
         <div className="absolute inset-0"></div>
         <div className="absolute inset-0 opacity-30">
           {[...Array(20)].map((_, i) => (
@@ -59,9 +59,9 @@ const Tech = () => {
             ></div>
           ))}
         </div>
-      </div>
+      </div> */}
 
-      <div className="relative z-10 container mx-auto px-4 pt-20 md:py-20">
+      <div className="relative z-10 container mx-auto px-4 pt-10 md:py-20">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -108,47 +108,81 @@ const Tech = () => {
             ))}
           </motion.div>
 
-          <div className="relative h-32 md:h-96 overflow-hidden md:mb-32">
+          <div className="relative h-32 md:h-96 overflow-hidden md:mb-20">
             <div className="absolute top-0 left-0 h-full w-full overflow-hidden">
               <div className="flex justify-center w-full px-4 py-10">
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-y-10 gap-x-6 md:gap-x-8 justify-items-center max-w-7xl">
-                  {techData[selectedTech].map((item, index) => (
-                    <motion.div
-                      key={`${item.name}-${index}`}
-                      className="flex flex-col items-center group"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <motion.div
-                        className="tech-card w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-2xl shadow-lg bg-secondary/10 backdrop-blur-sm border border-white/5 relative"
-                        style={{
-                          boxShadow: `0 10px 30px -10px ${item.hexCode || "#ffffff"}50`,
-                        }}
-                        whileHover={{
-                          scale: 1.1,
-                          boxShadow: `0 0 40px ${item.hexCode || "#ffffff"}60`,
-                          zIndex: 10,
-                        }}
-                      >
-                        <motion.img
-                          src={item.image}
-                          alt={item.name}
-                          loading="lazy"
-                          className="tech-logo w-12 h-12 md:w-16 md:h-16 object-contain"
-                          whileHover={{ rotate: 10 }}
-                        />
-                      </motion.div>
+                  {techData[selectedTech].map((item, index) => {
+                    const totalItems = techData[selectedTech].length;
+                    const itemsInLastRow = totalItems % 8;
+                    const isLastRow =
+                      Math.floor(index / 8) ===
+                      Math.floor((totalItems - 1) / 8);
+                    const positionInRow = index % 8;
 
-                      {/* Permanent Name Label */}
-                      <span
-                        className="mt-4 text-sm font-semibold tracking-wide text-center"
-                        style={{ color: item.hexCode || "inherit" }}
+                    // Calculate column start for items in incomplete last row
+                    const getColStart = () => {
+                      if (!isLastRow || itemsInLastRow === 0) return "";
+
+                      // For the last row with less than 8 items
+                      const startCol = Math.floor((8 - itemsInLastRow) / 2) + 1;
+
+                      if (positionInRow === 0)
+                        return `lg:col-start-${startCol}`;
+                      return "";
+                    };
+
+                    // Calculate column span to position all items correctly
+                    const getColSpan = () => {
+                      if (!isLastRow || itemsInLastRow === 0) return "";
+
+                      // This helps position all items in the last row relative to the first one
+                      if (positionInRow > 0) {
+                        return `lg:col-start-${Math.floor((8 - itemsInLastRow) / 2) + 1 + positionInRow}`;
+                      }
+                      return "";
+                    };
+
+                    const colClass = getColStart() || getColSpan();
+
+                    return (
+                      <motion.div
+                        key={`${item.name}-${index}`}
+                        className={`flex flex-col items-center group ${colClass}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
                       >
-                        {item.name}
-                      </span>
-                    </motion.div>
-                  ))}
+                        <motion.div
+                          className="tech-card w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-2xl shadow-lg bg-secondary/10 backdrop-blur-sm border border-white/5 relative"
+                          style={{
+                            boxShadow: `0 10px 30px -10px ${item.hexCode || "#ffffff"}50`,
+                          }}
+                          whileHover={{
+                            scale: 1.1,
+                            boxShadow: `0 0 40px ${item.hexCode || "#ffffff"}60`,
+                            zIndex: 10,
+                          }}
+                        >
+                          <motion.img
+                            src={item.image}
+                            alt={item.name}
+                            loading="lazy"
+                            className="tech-logo w-12 h-12 md:w-16 md:h-16 object-contain"
+                            whileHover={{ rotate: 10 }}
+                          />
+                        </motion.div>
+
+                        {/* Permanent Name Label */}
+                        <span
+                          className="mt-4 font-semibold tracking-wide text-center"
+                          style={{ color: item.hexCode || "inherit" }}
+                        >
+                          {item.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

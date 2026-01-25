@@ -13,6 +13,8 @@ import HomeBlogs from "./HomeBlogs/HomeBlogs";
 import Tech from "./Tech/Tech";
 import { useGetAllProjectsQuery } from "@/redux/api/projectApi";
 import HomeProjects from "./HomeProjects/HomeProjects";
+import { useGetTestimonialQuery } from "@/redux/api/testimonialApi";
+import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
 
 const Home = () => {
   const { data: aboutData, isLoading: aboutLoading } = useGetAboutQuery();
@@ -21,7 +23,10 @@ const Home = () => {
   const { data: homeService, isLoading: homeServiceLoading } =
     useGetServiceQuery();
   const { data: blogsData, isLoading: blogsLoading } = useGetBlogsQuery();
-  const { data: projectsData, isLoading: projectsLoading } = useGetAllProjectsQuery();
+  const { data: projectsData, isLoading: projectsLoading } =
+    useGetAllProjectsQuery();
+  const { data: testimonialData, isLoading: testimonialLoading } =
+    useGetTestimonialQuery();
 
   // console.log(blogs);
 
@@ -30,6 +35,7 @@ const Home = () => {
   const services = homeService?.data;
   const blogs = blogsData?.data;
   const projects = projectsData?.data;
+  const testimonial = testimonialData?.data;
 
   return (
     <div>
@@ -57,7 +63,18 @@ const Home = () => {
         <HomeBlogs blogs={blogs} />
       )}
       <Tech />
-      <HomeProjects projects={projects}/>
+      {projectsLoading || !projects ? (
+        // <HomeServiceSkeleton />
+        <p>Loading......</p>
+      ) : (
+        <HomeProjects projects={projects} />
+      )}
+      {testimonialLoading || !testimonial ? (
+        // <HomeServiceSkeleton />
+        <p>Loading......</p>
+      ) : (
+        <HomeTestimonial testimonial={testimonial} />
+      )}
     </div>
   );
 };

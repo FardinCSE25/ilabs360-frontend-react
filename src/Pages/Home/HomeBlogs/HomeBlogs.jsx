@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Title from "@/components/Title/Title";
 
 const HomeBlogs = ({ blogs = [] }) => {
-  console.log(blogs);
 
   // Utility: strip HTML & limit text
   const getExcerpt = (html, limit = 100) => {

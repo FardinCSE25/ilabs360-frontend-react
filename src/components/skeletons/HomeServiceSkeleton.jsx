@@ -1,8 +1,7 @@
 import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const HomeServiceSkeleton = ({services}) => {
-    console.log(services);
+const HomeServiceSkeleton = () => {
     
   return (
     <section
