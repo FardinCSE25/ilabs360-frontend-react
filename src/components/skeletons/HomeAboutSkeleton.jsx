@@ -12,9 +12,9 @@ const HomeAboutSkeleton = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <div className="mb-16 lg:mb-24 text-center space-y-4">
-          <Skeleton className="h-8 w-40 mx-auto rounded-full bg-[var(--skeleton)]" />
-          <Skeleton className="h-12 w-72 mx-auto bg-[var(--skeleton)]" />
-          <Skeleton className="h-5 w-[420px] mx-auto bg-[var(--skeleton)]" />
+          <Skeleton className="h-8 w-40 mx-auto rounded-full bg-muted" />
+          <Skeleton className="h-12 w-72 mx-auto bg-muted" />
+          <Skeleton className="h-5 w-[420px] mx-auto bg-muted" />
         </div>
 
         {/* Main Grid */}
@@ -22,11 +22,11 @@ const HomeAboutSkeleton = () => {
           {/* Left Column */}
           <div className="relative pt-16 lg:pt-20">
             {/* Image Skeleton */}
-            <Skeleton className="h-[450px] md:h-[550px] w-full rounded-3xl bg-[var(--skeleton)]" />
+            <Skeleton className="h-[450px] md:h-[550px] w-full rounded-3xl bg-muted" />
 
             {/* Floating Badge */}
             <div className="absolute top-0 right-0 lg:-right-6">
-              <Skeleton className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-[var(--skeleton)]" />
+              <Skeleton className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-muted" />
             </div>
 
             {/* Stats Overlay */}
@@ -35,8 +35,8 @@ const HomeAboutSkeleton = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <div key={i} className="space-y-2">
-                      <Skeleton className="h-4 w-20 bg-[var(--skeleton)]" />
-                      <Skeleton className="h-8 w-16 bg-[var(--skeleton)]" />
+                      <Skeleton className="h-4 w-20 bg-muted" />
+                      <Skeleton className="h-8 w-16 bg-muted" />
                     </div>
                   ))}
                 </div>
@@ -48,11 +48,11 @@ const HomeAboutSkeleton = () => {
           <div className="flex flex-col space-y-8 lg:pt-8">
             {/* Heading + Paragraph */}
             <div className="space-y-4">
-              <Skeleton className="h-8 w-full bg-[var(--skeleton)]" />
-              <Skeleton className="h-8 w-5/6 bg-[var(--skeleton)]" />
-              <Skeleton className="h-5 w-full bg-[var(--skeleton)]" />
-              <Skeleton className="h-5 w-11/12 bg-[var(--skeleton)]" />
-              <Skeleton className="h-5 w-4/5 bg-[var(--skeleton)]" />
+              <Skeleton className="h-8 w-full bg-muted" />
+              <Skeleton className="h-8 w-5/6 bg-muted" />
+              <Skeleton className="h-5 w-full bg-muted" />
+              <Skeleton className="h-5 w-11/12 bg-muted" />
+              <Skeleton className="h-5 w-4/5 bg-muted" />
             </div>
 
             {/* Feature Cards */}
@@ -62,13 +62,13 @@ const HomeAboutSkeleton = () => {
                   key={i}
                   className="flex items-center gap-5 p-5 rounded-2xl border bg-background"
                 >
-                  <Skeleton className="h-12 w-12 rounded-xl bg-[var(--skeleton)]" />
+                  <Skeleton className="h-12 w-12 rounded-xl bg-muted" />
                   <div className="flex-1 space-y-2">
-                    <Skeleton className="h-5 w-40 bg-[var(--skeleton)]" />
-                    <Skeleton className="h-4 w-full bg-[var(--skeleton)]" />
-                    <Skeleton className="h-4 w-5/6 bg-[var(--skeleton)]" />
+                    <Skeleton className="h-5 w-40 bg-muted" />
+                    <Skeleton className="h-4 w-full bg-muted" />
+                    <Skeleton className="h-4 w-5/6 bg-muted" />
                   </div>
-                  <Skeleton className="h-5 w-5 rounded-full bg-[var(--skeleton)]" />
+                  <Skeleton className="h-5 w-5 rounded-full bg-muted" />
                 </div>
               ))}
             </div>

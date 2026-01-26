@@ -17,10 +17,7 @@ import {
 import Title from "@/components/Title/Title";
 
 // Section Title Component
-const SectionTitle = ({
-  subtitle,
-  badgeText = "Innovation Labs 360",
-}) => {
+const SectionTitle = ({ subtitle, badgeText = "Innovation Labs 360" }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -204,7 +201,7 @@ const HomeAbout = ({ banner, metrics, whoWeAre }) => {
   };
 
   return (
-    <section className="relative min-h-screen py-20 lg:py-32 overflow-hidden bg-background">
+    <section className="relative py-20 lg:py-32 overflow-hidden bg-background">
       {/* Enhanced Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
