@@ -9,7 +9,14 @@ export const aboutApi = baseApi.injectEndpoints({
       }),
       providesTags: ["AboutApi"],
     }),
+    getHomeAbout: builder.query({
+      query: () => ({
+        url: `/about`,
+        method: "GET",
+      }),
+      providesTags: ["AboutApi"],
+    }),
   }),
 });
 
-export const { useGetAboutQuery } = aboutApi;
+export const { useGetAboutQuery, useGetHomeAboutQuery } = aboutApi;

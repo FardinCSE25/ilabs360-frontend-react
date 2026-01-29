@@ -63,7 +63,7 @@ const Tech = () => {
 
               {selectedTech === tech && (
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-secondary to-secondary/80"
+                  className="absolute inset-0 rounded-full bg-linear-to-r from-secondary to-secondary/80"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}

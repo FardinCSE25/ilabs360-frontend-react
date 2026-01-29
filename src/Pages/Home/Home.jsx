@@ -1,78 +1,76 @@
 import HomeBanner from "./HomeBanner/HomeBanner";
 import HomeAbout from "./HomeAbout/HomeAbout";
 import { useGetAboutQuery } from "@/redux/api/aboutApi";
-import {
-  useGetHomeMetricsQuery,
-  useGetServiceQuery,
-} from "@/redux/api/homeApi";
+import { useGetHomeMetricsQuery, useGetServiceQuery } from "@/redux/api/homeApi";
 import HomeService from "./HomeService/HomeService";
 import HomeAboutSkeleton from "@/components/skeletons/HomeAboutSkeleton";
 import HomeServiceSkeleton from "@/components/skeletons/HomeServiceSkeleton";
-import { useGetBlogsQuery } from "@/redux/api/blogApi";
 import Tech from "./Tech/Tech";
 import { useGetAllProjectsQuery } from "@/redux/api/projectApi";
 import HomeProjects from "./HomeProjects/HomeProjects";
 import { useGetTestimonialQuery } from "@/redux/api/testimonialApi";
-import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
 import HomeProjectsSkeleton from "@/components/skeletons/HomeProjectsSkeleton";
 import HomeTestimonialSkeleton from "@/components/skeletons/HomeTestimonialSkeleton";
+import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
+import HomeClients from "./HomeClients/HomeClients";
 
 const Home = () => {
-  const { data: aboutData, isLoading: aboutLoading } = useGetAboutQuery();
-  const { data: homeMetricsData, isLoading: metricsLoading } =
+  const { data: homeSectionData, isLoading: homeSectionLoading } =
     useGetHomeMetricsQuery();
+
   const { data: homeService, isLoading: homeServiceLoading } =
     useGetServiceQuery();
-  const { data: blogsData, isLoading: blogsLoading } = useGetBlogsQuery();
+
   const { data: projectsData, isLoading: projectsLoading } =
     useGetAllProjectsQuery();
+
   const { data: testimonialData, isLoading: testimonialLoading } =
     useGetTestimonialQuery();
 
-  // console.log(blogs);
-
-  const about = aboutData?.data?.[0];
-  const metrics = homeMetricsData?.data?.[0]?.metrics;
-  const services = homeService?.data;
-  const blogs = blogsData?.data;
-  const projects = projectsData?.data;
-  const testimonial = testimonialData?.data;
+  // ✅ Home section main object
+  const homeSection = homeSectionData?.data?.[0];
 
   return (
     <div>
       <HomeBanner />
 
-      {aboutLoading || metricsLoading || !about || !metrics ? (
+      {/* ABOUT SECTION */}
+      {homeSectionLoading || !homeSection ? (
         <HomeAboutSkeleton />
       ) : (
         <HomeAbout
-          loading={aboutLoading || metricsLoading}
-          whoWeAre={about.who_we_are}
-          banner={about.banner}
-          metrics={metrics}
+          title={homeSection.title}
+          subtitle={homeSection.subtitle}
+          description={homeSection.description}
+          image={homeSection.image}
+          metrics={homeSection.metrics}
         />
       )}
-      {homeServiceLoading || !services ? (
+
+      {/* SERVICES */}
+      {homeServiceLoading || !homeService?.data ? (
         <HomeServiceSkeleton />
       ) : (
-        <HomeService services={services} />
+        <HomeService services={homeService.data} />
       )}
-      {/* {blogsLoading || !blogs ? (
-        // <HomeServiceSkeleton />
-        <p>Loading......</p>
-      ) : (
-        <HomeBlogs blogs={blogs} />
-      )} */}
+
       <Tech />
-      {projectsLoading || !projects ? (
+
+      {/* PROJECTS */}
+      {projectsLoading || !projectsData?.data ? (
         <HomeProjectsSkeleton />
       ) : (
-        <HomeProjects projects={projects} />
+        <HomeProjects projects={projectsData.data} />
       )}
-      {testimonialLoading || !testimonial ? (
+
+      {/* TESTIMONIAL */}
+      {testimonialLoading || !testimonialData?.data ? (
         <HomeTestimonialSkeleton />
       ) : (
-        <HomeTestimonial testimonial={testimonial} />
+        <>
+        <HomeTestimonial testimonial={testimonialData.data} />
+        <HomeClients testimonial={testimonialData.data}/>
+        </>
       )}
     </div>
   );

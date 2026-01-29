@@ -10,7 +10,7 @@ const HomeTestimonial = ({ testimonial }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Cards pop in one by one
+        staggerChildren: 0.2,
       },
     },
   };
@@ -35,7 +35,7 @@ const HomeTestimonial = ({ testimonial }) => {
         viewport={{ once: true, amount: 0.2 }}
         className="max-w-425 mx-auto grid grid-cols-1 gap-8 px-6 md:grid-cols-2 lg:grid-cols-4"
       >
-        {testimonial?.map((item) => (
+        {testimonial?.slice(0, 4).map((item) => ( // <-- show only first 4
           <motion.div
             key={item.id}
             variants={cardVariants}
@@ -77,7 +77,7 @@ const HomeTestimonial = ({ testimonial }) => {
               <Quote className="w-12 h-12 text-primary/20 group-hover:text-primary/30 transition-colors" />
             </div>
 
-            {/* Testimonial Text with quotation marks */}
+            {/* Testimonial Text */}
             <div className="relative flex-1 mb-6">
               <p className="text-gray-600 leading-relaxed font-medium text-center relative">
                 <span className="absolute -left-2 -top-2 text-2xl text-primary/30 font-serif">
@@ -92,7 +92,7 @@ const HomeTestimonial = ({ testimonial }) => {
               </p>
             </div>
 
-            {/* Rating stars at the bottom of the card */}
+            {/* Rating stars */}
             <div className="flex items-center justify-center mt-auto pt-4 border-t border-gray-100">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
@@ -108,9 +108,6 @@ const HomeTestimonial = ({ testimonial }) => {
                 ))}
               </div>
             </div>
-
-            {/* Bottom Accent Line */}
-            {/* <div className="mt-1 h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full" /> */}
           </motion.div>
         ))}
       </motion.div>
