@@ -1,3 +1,4 @@
+import CumButton from "@/components/CumButton/CumButton";
 import Title from "@/components/Title/Title";
 import React, { useState } from "react";
 
@@ -54,21 +55,11 @@ const HomeClients = ({ testimonial }) => {
         {/* Action Buttons */}
         <div className="mt-12 flex justify-center gap-4">
           {visibleCount < testimonial?.length && (
-            <button
-              onClick={showMore}
-              className="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-all font-medium"
-            >
-              Show More
-            </button>
+            <CumButton onClick={showMore} title="Show More"/>
           )}
 
           {visibleCount > 8 && (
-            <button
-              onClick={showLess}
-              className="px-6 py-2 border-2 border-primary text-primary rounded-md hover:bg-primary hover:text-white transition-all font-medium"
-            >
-              Show Less
-            </button>
+            <CumButton onClick={showLess} title="Show Less"/>
           )}
         </div>
       </div>

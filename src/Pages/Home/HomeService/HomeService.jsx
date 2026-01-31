@@ -57,7 +57,7 @@ const HomeService = ({ services }) => {
 
   return (
     <section className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 mb-14">
         <Title name="Our Services"/>
 
         <motion.div
