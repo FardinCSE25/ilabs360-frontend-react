@@ -1,6 +1,6 @@
 import HomeBanner from "./HomeBanner/HomeBanner";
 import HomeAbout from "./HomeAbout/HomeAbout";
-import { useGetAboutQuery } from "@/redux/api/aboutApi";
+import { useGetProfilesQuery } from "@/redux/api/aboutApi";
 import { useGetHomeMetricsQuery, useGetServiceQuery } from "@/redux/api/homeApi";
 import HomeService from "./HomeService/HomeService";
 import HomeAboutSkeleton from "@/components/skeletons/HomeAboutSkeleton";
@@ -13,6 +13,7 @@ import HomeProjectsSkeleton from "@/components/skeletons/HomeProjectsSkeleton";
 import HomeTestimonialSkeleton from "@/components/skeletons/HomeTestimonialSkeleton";
 import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
 import HomeClients from "./HomeClients/HomeClients";
+import TeamLeaders from "../About/TeamLeaders/TeamLeaders";
 
 const Home = () => {
   const { data: homeSectionData, isLoading: homeSectionLoading } =
@@ -26,6 +27,9 @@ const Home = () => {
 
   const { data: testimonialData, isLoading: testimonialLoading } =
     useGetTestimonialQuery();
+
+  const { data: profilesData, isLoading: profilesLoading } =
+    useGetProfilesQuery();
 
   // ✅ Home section main object
   const homeSection = homeSectionData?.data?.[0];
@@ -60,6 +64,7 @@ const Home = () => {
       {projectsLoading || !projectsData?.data ? (
         <HomeProjectsSkeleton />
       ) : (
+        
         <HomeProjects projects={projectsData.data} />
       )}
 
@@ -71,6 +76,12 @@ const Home = () => {
         <HomeTestimonial testimonial={testimonialData.data} />
         <HomeClients testimonial={testimonialData.data}/>
         </>
+      )}
+       {profilesLoading || !profilesData?.data ? (
+        <HomeProjectsSkeleton />
+      ) : (
+        
+        <TeamLeaders profiles={profilesData.data} />
       )}
     </div>
   );

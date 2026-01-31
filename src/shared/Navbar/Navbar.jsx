@@ -22,7 +22,6 @@ const navItems = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Projects", path: "/projects" },
-  { label: "Gallery", path: "/gallery" },
   { label: "Testimonial", path: "/testimonial" },
   { label: "Contact", path: "/contact" },
 ];
