@@ -3,6 +3,8 @@ import Banner from "./Banner/Banner";
 import aboutBg from "@/assets/BannerImages/About.jpeg";
 import { useGetAboutQuery } from "@/redux/api/aboutApi";
 import Missions from "./Missions/Missions";
+import Gallery from "./Gallery/Gallery";
+import Management from "./Management/Management";
 
 const About = () => {
   const { data: about, isLoading: aboutLoading } = useGetAboutQuery();
@@ -14,7 +16,9 @@ const About = () => {
         title="About Us"
         highlight="Excellence"
       />
-      <Missions about={about.data[0]} aboutLoading={aboutLoading} />
+      <Missions about={about?.data[0]} aboutLoading={aboutLoading} />
+      <Gallery />
+      <Management />
     </>
   );
 };

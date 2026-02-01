@@ -222,7 +222,7 @@ const Missions = ({ about, aboutLoading }) => {
                 </h3>
               </div>
 
-              <p className="text-card-foreground/90 leading-relaxed text-sm md:text-lg font-light min-h-[80px] md:min-h-[120px]">
+              <p className="text-card-foreground/90 leading-relaxed text-sm md:text-lg font-light min-h-[80px] md:min-h-[146px]">
                 {visionTyped}
                 {visionTyped.length < about?.vission?.length && (
                   <span className="inline-block w-0.5 md:w-1 h-4 md:h-5 ml-1 bg-secondary animate-pulse"></span>
