@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
 const MiniAbout = ({ about, metrics = [] }) => {
+    console.log(about);
+    
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [animatedValues, setAnimatedValues] = useState({});
@@ -77,7 +79,7 @@ const MiniAbout = ({ about, metrics = [] }) => {
                 className="w-full h-[260px] sm:h-[360px] md:h-[440px]"
               >
                 <img
-                  src={about.banner}
+                  src={about.data[0].banner}
                   alt="Corporate Banner"
                   className="w-full h-full object-cover"
                 />
@@ -130,7 +132,7 @@ const MiniAbout = ({ about, metrics = [] }) => {
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
                 Crafting Exceptional <br />
                 <span className="text-primary underline decoration-slate-200 underline-offset-8">
-                  Real Estate Experiences
+                  Software Experiences
                 </span>
               </h2>
             </motion.div>
@@ -141,7 +143,7 @@ const MiniAbout = ({ about, metrics = [] }) => {
               transition={{ delay: 0.3 }}
               className="text-slate-600 text-sm md:text-lg leading-relaxed border-l-4 border-slate-100  md:pl-6"
             >
-              {about.who_we_are}
+              {about?.data[0].who_we_are}
             </motion.p>
 
             {/* METRICS */}

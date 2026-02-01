@@ -1,16 +1,10 @@
 import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import img1 from "../../../../public/reactAssets/images/Gallery/1.jpeg";
-import img2 from "../../../../public/reactAssets/images/Gallery/2.jpeg";
-import img3 from "../../../../public/reactAssets/images/Gallery/3.jpeg";
-import img4 from "../../../../public/reactAssets/images/Gallery/4.jpeg";
-import img5 from "../../../../public/reactAssets/images/Gallery/5.jpeg";
 import Title from "@/components/Title/Title";
 
-const Gallery = () => {
+const Gallery = ({ galleryImageData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [img1, img2, img3, img4, img5];
   const handleChange = (index) => {
     setCurrentIndex(index);
   };
@@ -94,7 +88,7 @@ const Gallery = () => {
               )
             }
           >
-            {images.map((image, index) => (
+            {galleryImageData.map((image, index) => (
               <div key={index} className="relative group">
                 <img
                   src={`${image}`}
@@ -117,7 +111,7 @@ const Gallery = () => {
         </div>
 
         <div className="flex justify-center space-x-2 mt-2">
-          {images.map((_, index) => (
+          {galleryImageData?.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}

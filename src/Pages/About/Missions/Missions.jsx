@@ -2,7 +2,6 @@ import Title from "@/components/Title/Title";
 import React, { useState, useEffect, useRef } from "react";
 
 const Missions = ({ about, aboutLoading }) => {
-  console.log(about);
 
   const [isVisible, setIsVisible] = useState(false);
   const [missionTyped, setMissionTyped] = useState("");

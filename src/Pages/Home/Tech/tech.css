@@ -55,16 +55,7 @@ nav a {
   position: relative;
 }
 
-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(to right, #a78bfa, #ec4899);
-  transition: width 0.3s ease;
-}
+
 
 nav a:hover::after {
   width: 100%;
