@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "@/Pages/Home/Home";
 import ProjectDetail from "@/Pages/ProjectDetail/ProjectDetail";
 import About from "@/Pages/About/About";
+import Testimonial from "@/Pages/Testimonial/Testimonial";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/testimonial",
+        element: <Testimonial />,
       },
     ],
   },
