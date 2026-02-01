@@ -7,7 +7,7 @@ export const homeApi = baseApi.injectEndpoints({
         url: "/home-section",
         method: "GET",
       }),
-      providesTags: ["HomeApi"],
+      providesTags: ["HomeApi"], 
     }),
     getSettingsData: builder.query({
       query: () => ({
