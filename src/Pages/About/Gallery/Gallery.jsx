@@ -4,6 +4,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Title from "@/components/Title/Title";
 
 const Gallery = ({ galleryImageData }) => {
+  console.log(galleryImageData);
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleChange = (index) => {
     setCurrentIndex(index);
@@ -88,10 +90,10 @@ const Gallery = ({ galleryImageData }) => {
               )
             }
           >
-            {galleryImageData.map((image, index) => (
+            {galleryImageData?.map((image, index) => (
               <div key={index} className="relative group">
                 <img
-                  src={`${image}`}
+                  src={`${image.image}`}
                   alt={`Gallery Image ${index + 1}`}
                   className="w-full h-[350px] md:h-[550px] 2xl:h-[750px] object-cover transition-all duration-500 group-hover:scale-105"
                 />

@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 const Management = () => {
   const [managementData, setManagementData] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log(managementData);
+  
 
   useEffect(() => {
     fetch("/Json/Management.json")
@@ -47,7 +49,7 @@ const Management = () => {
                   <div className="text-sm text-gray-600 dark:text-gray-400">
                     Team
                   </div>
-                  <hr className="my-4 border-gray-300 dark:border-gray-600" />
+                  <hr className="my-4 border border-primary dark:border-gray-600" />
                 </div>
               ))}
             </div>

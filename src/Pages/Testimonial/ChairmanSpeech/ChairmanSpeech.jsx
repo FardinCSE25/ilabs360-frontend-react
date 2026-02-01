@@ -27,7 +27,7 @@ const ChairmanSpeech = ({ data }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-blue-600 font-semibold tracking-widest uppercase text-xs sm:text-sm mb-3 sm:mb-4 block">
+            <span className="text-primary font-semibold tracking-widest uppercase text-xs sm:text-sm mb-3 sm:mb-4 block">
               Leadership Message
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
@@ -71,7 +71,7 @@ const ChairmanSpeech = ({ data }) => {
                 className="h-12 sm:h-16 object-contain"
               />
             ) : (
-              <div className="h-1 bg-gray-900 w-10 sm:w-12" />
+              <div className="h-1 bg-primary w-10 sm:w-12" />
             )}
             <p className="text-xs sm:text-sm md:text-base text-gray-500 font-medium">
               Chairman of the Board

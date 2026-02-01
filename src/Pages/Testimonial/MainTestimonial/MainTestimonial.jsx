@@ -50,9 +50,9 @@ const MainTestimonial = ({ data }) => {
         >
           <h2 className="text-3xl sm:text-4xl md:text-7xl font-serif font-bold text-gray-900 mb-4 md:mb-6 tracking-tight">
             Voices of{" "}
-            <span className="italic font-light text-gray-500">Excellence</span>
+            <span className="italic font-light text-primary">Excellence</span>
           </h2>
-          <div className="w-16 md:w-24 h-1 bg-gray-900 mx-auto rounded-full" />
+          <div className="w-16 md:w-24 h-1 bg-primary mx-auto rounded-full" />
         </motion.div>
 
         {/* Grid */}

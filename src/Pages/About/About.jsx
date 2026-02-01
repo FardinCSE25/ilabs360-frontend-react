@@ -33,7 +33,7 @@ const About = () => {
         />
       )}
       <Missions about={about?.data[0]} aboutLoading={aboutLoading} />
-      <Gallery galleryImageData={galleryImageData} />
+      <Gallery galleryImageData={galleryImageData?.data} />
       <Management />
     </>
   );
