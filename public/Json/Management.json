@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Project Management ",
+    "number": "04"
+  },
+  {
+    "name": "Development ",
+    "number": "08"
+  },
+  {
+    "name": "Implementation ",
+    "number": "03"
+  },
+  {
+    "name": "Service & Support ",
+    "number": "02"
+  },
+  {
+    "name": "Sales & Marketing ",
+    "number": "02"
+  },
+  {
+    "name": "Administration ",
+    "number": "02"
+  }
+]
