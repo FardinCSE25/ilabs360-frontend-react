@@ -1,40 +1,59 @@
 import React, { useMemo, useState } from "react";
-import ProjectBanner from "../../components/commonBanner/commonBanner";
-import FilterSection from "./FilterSection/FilterSection";
-import MainProject from "./MainProject/MainProject";
 import ProjectSkeletons from "@/components/skeletons/projectSkeletons";
 import CommonBanner from "../../components/commonBanner/commonBanner";
 import projectImg from "../../assets/BannerImages/Project.jpeg";
+import FilterSection from "./FilterSection/FilterSection";
 import { useGetAllProjectsQuery } from "@/redux/api/projectApi";
+import ProjectsCard from "@/components/ProjectsCard/ProjectsCard";
 
 const Projects = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  // Scroll to top when page loads
+  // window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Fetch all projects from your API
   const { data, isLoading } = useGetAllProjectsQuery();
   const projects = data?.data || [];
 
+  // Static categories (replace with API data if you have it)
+  const categoriesData = [
+    { id: "web", name: "Web Development" },
+    { id: "mobile", name: "Mobile App" },
+    { id: "game", name: "Game Development" },
+  ];
+
+  // Filters state
   const [filters, setFilters] = useState({
     status: "",
-    type: "",
-    location: "",
+    category: "",
+    sort: "latest",
   });
 
-  // Unique locations
-  const locations = useMemo(() => {
-    return [...new Set(projects.map((p) => p.location))];
-  }, [projects]);
-
-  // Filtered projects
+  // Filter logic
   const filteredProjects = useMemo(() => {
-    return projects.filter((p) => {
-      return (
-        (!filters.status || p.status === filters.status) &&
-        (!filters.type || p.project_type === filters.type) &&
-        (!filters.location || p.location === filters.location)
+    let filtered = [...projects];
+
+    // Filter by status
+    if (filters.status) {
+      filtered = filtered.filter((p) => p.status === filters.status);
+    }
+
+    // Filter by category
+    if (filters.category) {
+      filtered = filtered.filter((p) => p.project_category === filters.category);
+    }
+
+    // Sort by date (assuming p.created_at exists)
+    if (filters.sort === "latest") {
+      filtered = filtered.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
-    });
+    } else if (filters.sort === "oldest") {
+      filtered = filtered.sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      );
+    }
+
+    return filtered;
   }, [projects, filters]);
 
   if (isLoading) {
@@ -46,15 +65,17 @@ const Projects = () => {
       <CommonBanner
         backgroundImage={projectImg}
         subtitle="Our Portfolio"
-        title="Architectural"
-        highlight="Excellence"
+        title="Project"
+        highlight="Showcase"
       />
+
       <FilterSection
         filters={filters}
         setFilters={setFilters}
-        locations={locations}
+        categories={categoriesData}
       />
-      <MainProject projects={filteredProjects} />
+
+      <ProjectsCard projects={filteredProjects} />
     </>
   );
 };

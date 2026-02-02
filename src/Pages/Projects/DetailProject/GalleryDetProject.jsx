@@ -104,8 +104,8 @@ const GalleryDetProject = ({ project_gallery = [] }) => {
 
   const slides = project_gallery.map((img, idx) => ({ 
     src: img,
-    title: `Architecture Shot ${idx + 1}`,
-    description: "High-resolution architectural photography"
+    title: `${idx + 1}`,
+    // description: "High-resolution architectural photography"
   }));
 
   const handleSlideHover = useCallback((index, isHovering) => {

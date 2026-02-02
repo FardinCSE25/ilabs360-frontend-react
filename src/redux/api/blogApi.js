@@ -3,13 +3,18 @@ import { baseApi } from "./baseApi";
 export const blogApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getBlogs: builder.query({
-      query: () => ({
-        url: `/blogs`,
-        method: "GET",
-      }),
+      query: () => "/blogs",
+      providesTags: ["BlogApi"],
+    }),
+
+    getDetailBlogs: builder.query({
+      query: (slug) => `/blogs/${slug}`,
       providesTags: ["BlogApi"],
     }),
   }),
 });
 
-export const { useGetBlogsQuery } = blogApi;
+export const {
+  useGetBlogsQuery,
+  useGetDetailBlogsQuery,
+} = blogApi;

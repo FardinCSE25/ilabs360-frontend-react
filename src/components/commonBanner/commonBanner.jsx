@@ -15,7 +15,7 @@ const CommonBanner = ({
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-black"
+      className="relative w-full overflow-hidden bg-black mt-36"
       style={{ height }}
     >
       {/* Background */}

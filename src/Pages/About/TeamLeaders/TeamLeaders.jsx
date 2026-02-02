@@ -1,164 +1,295 @@
+import React, { useState, useRef, useEffect } from "react";
 import Title from "@/components/Title/Title";
 
 const TeamLeaders = ({ profiles = [] }) => {
+  const [selectedProfile, setSelectedProfile] = useState(null);
+  const modalContentRef = useRef(null);
+
+  // Handle modal overflow scrolling
+  useEffect(() => {
+    if (selectedProfile && modalContentRef.current) {
+      const modalContent = modalContentRef.current;
+      if (modalContent.scrollHeight > modalContent.clientHeight) {
+        modalContent.classList.add("overflow-y-auto");
+        modalContent.classList.remove("overflow-hidden");
+      }
+    }
+  }, [selectedProfile]);
+
+  const parseSkills = (skills) => {
+    if (!skills) return ["Leadership"];
+    if (Array.isArray(skills)) {
+      // Handle array of strings or array containing comma-separated strings
+      return skills.flatMap(skill => 
+        typeof skill === 'string' ? skill.split(',').map(s => s.trim()) : skill
+      );
+    }
+    return skills.split(',').map(skill => skill.trim());
+  };
+
+  const formatBio = (bio) => {
+    if (!bio) return "No detailed biography provided.";
+    
+    // Clean up HTML and limit length for modal display
+    const cleanBio = bio
+      .replace(/<p>/g, '<p class="mb-4 last:mb-0">')
+      .replace(/<strong>/g, '<strong class="font-semibold">')
+      .replace(/<a[^>]*>/g, '<a class="text-primary hover:underline" target="_blank" rel="noopener noreferrer">')
+      .replace(/<br\s*\/?>/g, '<br class="my-2">');
+    
+    return cleanBio;
+  };
+
   return (
-    <div className="my-20 md:my-32 px-4 max-w-425 mx-auto">
-      <Title name="Meet Our Team" />
+    <section className="py-16 md:py-20 px-4 md:px-6 max-w-7xl mx-auto">
+      <div className="mb-12 md:mb-16 text-center">
+        <Title name="Our Leadership" />
+        <p className="text-gray-600 dark:text-gray-400 mt-3 text-base md:text-lg max-w-2xl mx-auto">
+          Meet the experienced professionals driving innovation and excellence across our organization.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+      {/* Grid Layout - Refined */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         {profiles.map((profile, index) => {
-          // Skills handling
-          const skills = Array.isArray(profile?.skills)
-            ? profile.skills
-            : typeof profile?.skills === "string"
-              ? profile.skills.split(",")
-              : [];
-
-          const displayName =
-            profile?.name || profile?.user?.name || "Name not found";
-
+          const displayName = profile?.name || "Team Member";
+          const skills = parseSkills(profile.skills).slice(0, 2); // Show only 2 skills on card
+          
           return (
             <div
               key={profile?.id || index}
-              className="relative group p-[2px] rounded-2xl bg-gradient-to-tr from-primary via-secondary to-primary transition-all duration-500"
+              onClick={() => setSelectedProfile(profile)}
+              className="group cursor-pointer bg-white dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 transition-all duration-300 hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700"
             >
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-3">
-                {/* Header */}
-                <div className="relative h-60 bg-gradient-to-br from-primary via-secondary to-primary flex items-center justify-center overflow-hidden">
-                  {profile?.image ? (
-                    <div className="relative w-full h-full">
-                      <img
-                        src={profile.image}
-                        alt={displayName}
-                        className="absolute inset-0 w-full h-full object-cover opacity-30"
-                      />
-                      <img
-                        src={profile.image}
-                        alt={displayName}
-                        className="w-40 h-40 rounded-full border-[6px] border-white object-cover absolute -bottom-10 left-1/2 -translate-x-1/2 shadow-xl"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-40 h-40 rounded-full bg-secondary flex items-center justify-center text-xl font-bold text-white border-[6px] border-white absolute -bottom-10 left-1/2 -translate-x-1/2 shadow-xl">
-                      {displayName.split(" ").slice(0, 2).join(" ")}
-                    </div>
-                  )}
+              {/* Image Section */}
+              <div className="relative h-64 md:h-72 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                <img
+                  src={profile.image || "/api/placeholder/400/500"}
+                  alt={displayName}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <span className="text-white text-sm font-medium flex items-center gap-2">
+                    View details
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
                 </div>
+              </div>
 
-                {/* Body */}
-                <div className="pt-7 pb-8 px-6 h-[321px]">
-                  <h3 className="text-base md:text-lg 2xl:text-2xl font-bold text-center text-secondary mb-2">
-                    {displayName}
-                  </h3>
-
-                  {/* Designation */}
-                  <p className="text-sm text-primary text-center font-medium mb-6">
-                    {profile?.designation || "Designation not specified"}
-                  </p>
-
-                  {/* Experience & Skills */}
-                  <div className="flex justify-between mb-6">
-                    <div className="text-center">
-                      <span className="block text-3xl font-bold text-secondary">
-                        {profile?.years_in_company
-                          ? `${profile.years_in_company}+`
-                          : "N/A"}
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        Years in Company
-                      </span>
-                    </div>
-
-                    <div className="text-center max-w-[120px]">
-                      <span className="block text-xs font-semibold text-secondary uppercase">
-                        Skills
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        {skills.length
-                          ? skills.slice(0, 2).join(", ")
-                          : "Skills not found"}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Bio */}
-                  <p className="text-sm text-gray-600 mb-6 line-clamp-3">
-                    {profile?.bio ||
-                      profile?.description ||
-                      "No biography available"}
-                  </p>
-
-                  {/* Social Links */}
-                  {/* Social Links */}
-                  {(profile?.linkedin_url ||
-                    profile?.github_url ||
-                    profile?.portfolio_url) && (
-                    <div className="flex justify-center space-x-6 pt-6 border-t border-gray-100">
-                      {/* LinkedIn */}
-                      {profile?.linkedin_url && (
-                        <a
-                          href={profile.linkedin_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-primary transition-transform transform hover:scale-125"
-                          aria-label="LinkedIn"
-                        >
-                          <svg
-                            className="w-6 h-6"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 24h4V7h-4v17zM9 7h3.5v2.2h.1c.5-.9 1.7-2.2 3.5-2.2 3.7 0 4.4 2.4 4.4 5.5V24h-4v-8.2c0-2-.04-4.6-2.8-4.6s-3.2 2.2-3.2 4.5V24H9V7z" />
-                          </svg>
-                        </a>
-                      )}
-
-                      {/* GitHub */}
-                      {profile?.github_url && (
-                        <a
-                          href={profile.github_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-secondary transition-transform transform hover:scale-125"
-                          aria-label="GitHub"
-                        >
-                          <svg
-                            className="w-6 h-6"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.07-.02-2.1-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.48.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.16 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0C17.99 4.3 19 4.62 19 4.62c.66 1.64.25 2.86.12 3.16.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.65-5.48 5.95.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-                          </svg>
-                        </a>
-                      )}
-
-                      {/* Portfolio */}
-                      {profile?.portfolio_url && (
-                        <a
-                          href={profile.portfolio_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-400 hover:text-primary transition-transform transform hover:scale-125"
-                          aria-label="Portfolio"
-                        >
-                          <svg
-                            className="w-6 h-6"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M12 2C6.477 2 2 6.478 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10S17.523 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-1 4h2v6h-2zm0 8h2v2h-2z" />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
-                  )}
+              {/* Text Section */}
+              <div className="p-5 md:p-6">
+                <div className="mb-3">
+                  <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
+                    {profile?.department || "General"}
+                  </span>
+                </div>
+                
+                <p className="text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-medium mb-1">
+                  {profile?.designation || "Professional"}
+                </p>
+                
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-1">
+                  {displayName}
+                </h3>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {skills.map((skill, idx) => (
+                    <span 
+                      key={`${skill}-${idx}`} 
+                      className="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs rounded-md"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {profile?.years_in_company || '1'}+ years
+                  </span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                    {profile?.employment_type?.toLowerCase() || 'Full-time'}
+                  </span>
                 </div>
               </div>
             </div>
           );
         })}
       </div>
-    </div>
+
+      {/* Professional Modal */}
+      {selectedProfile && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Overlay */}
+          <div 
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            onClick={() => setSelectedProfile(null)}
+          ></div>
+
+          {/* Modal Container */}
+          <div className="relative w-full max-w-5xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in duration-200">
+            {/* Close Button */}
+            <button 
+              onClick={() => setSelectedProfile(null)}
+              className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Left: Image */}
+            <div className="w-full md:w-2/5 h-64 md:h-auto bg-gray-100 dark:bg-gray-800">
+              <img 
+                src={selectedProfile.image || "/api/placeholder/600/800"} 
+                className="w-full h-full object-cover"
+                alt={selectedProfile.name}
+              />
+            </div>
+
+            {/* Right: Content */}
+            <div 
+              ref={modalContentRef}
+              className="w-full md:w-3/5 flex flex-col overflow-hidden"
+            >
+              <div className="flex-1 overflow-y-auto p-6 md:p-8">
+                {/* Header */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">
+                      {selectedProfile.department || "General"}
+                    </span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {selectedProfile.years_in_company || '1'}+ years
+                    </span>
+                  </div>
+                  
+                  <p className="text-gray-500 dark:text-gray-400 text-sm uppercase tracking-wider font-medium mb-1">
+                    {selectedProfile.designation}
+                  </p>
+                  
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                    {selectedProfile.name || selectedProfile.user?.name}
+                  </h2>
+                  
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {selectedProfile.email || selectedProfile.user?.email}
+                  </p>
+                </div>
+
+                {/* Expertise */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">
+                    Expertise
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {parseSkills(selectedProfile.skills).map((skill, index) => (
+                      <span 
+                        key={index} 
+                        className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Biography */}
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-3">
+                    Biography
+                  </h4>
+                  <div 
+                    className="text-gray-600 dark:text-gray-300 text-sm md:text-base leading-relaxed prose prose-sm max-w-none dark:prose-invert"
+                    dangerouslySetInnerHTML={{ __html: formatBio(selectedProfile.bio || selectedProfile.description) }}
+                  />
+                </div>
+
+                {/* Contact & Details */}
+                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <h5 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+                        Employment
+                      </h5>
+                      <p className="text-gray-700 dark:text-gray-300 capitalize">
+                        {selectedProfile.employment_type?.toLowerCase() || 'Full-time'}
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h5 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
+                        Joined
+                      </h5>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {selectedProfile.joining_date 
+                          ? new Date(selectedProfile.joining_date).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })
+                          : 'Not specified'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Social Links (Optional) */}
+                  {(selectedProfile.linkedin_url || selectedProfile.github_url || selectedProfile.portfolio_url) && (
+                    <div className="mt-6">
+                      <h5 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+                        Connect
+                      </h5>
+                      <div className="flex gap-3">
+                        {selectedProfile.linkedin_url && (
+                          <a 
+                            href={selectedProfile.linkedin_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                          </a>
+                        )}
+                        {selectedProfile.github_url && (
+                          <a 
+                            href={selectedProfile.github_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                          </a>
+                        )}
+                        {selectedProfile.portfolio_url && (
+                          <a 
+                            href={selectedProfile.portfolio_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 

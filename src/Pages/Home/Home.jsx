@@ -7,13 +7,16 @@ import HomeAboutSkeleton from "@/components/skeletons/HomeAboutSkeleton";
 import HomeServiceSkeleton from "@/components/skeletons/HomeServiceSkeleton";
 import Tech from "./Tech/Tech";
 import { useGetAllProjectsQuery } from "@/redux/api/projectApi";
-import HomeProjects from "./HomeProjects/HomeProjects";
 import { useGetTestimonialQuery } from "@/redux/api/testimonialApi";
 import HomeProjectsSkeleton from "@/components/skeletons/HomeProjectsSkeleton";
 import HomeTestimonialSkeleton from "@/components/skeletons/HomeTestimonialSkeleton";
-import HomeTestimonial from "./HomeTestimonial/HomeTestimonial";
 import HomeClients from "./HomeClients/HomeClients";
 import TeamLeaders from "../About/TeamLeaders/TeamLeaders";
+import ProjectsCard from "@/components/ProjectsCard/ProjectsCard";
+import TestimonialSection from "./HomeTestimonial/TestimonialSection";
+import HomeBlogs from "../Blogs/BlogsCard/BlogsCard";
+import { useGetBlogsQuery } from "@/redux/api/blogApi";
+import BlogsCard from "../Blogs/BlogsCard/BlogsCard";
 
 const Home = () => {
   const { data: homeSectionData, isLoading: homeSectionLoading } =
@@ -30,6 +33,9 @@ const Home = () => {
 
   const { data: profilesData, isLoading: profilesLoading } =
     useGetProfilesQuery();
+
+  const { data: blogsData, isLoading: blogLoading } =
+    useGetBlogsQuery();
 
   // ✅ Home section main object
   const homeSection = homeSectionData?.data?.[0];
@@ -65,7 +71,7 @@ const Home = () => {
         <HomeProjectsSkeleton />
       ) : (
         
-        <HomeProjects projects={projectsData.data} />
+        <ProjectsCard projects={projectsData.data} />
       )}
 
       {/* TESTIMONIAL */}
@@ -73,7 +79,7 @@ const Home = () => {
         <HomeTestimonialSkeleton />
       ) : (
         <>
-        <HomeTestimonial testimonial={testimonialData.data} />
+        <TestimonialSection testimonial={testimonialData.data} />
         <HomeClients testimonial={testimonialData.data}/>
         </>
       )}
@@ -82,6 +88,12 @@ const Home = () => {
       ) : (
         
         <TeamLeaders profiles={profilesData.data} />
+      )}
+       {blogLoading || !blogsData?.data ? (
+        <HomeProjectsSkeleton />
+      ) : (
+        
+        <BlogsCard blogs={blogsData.data} />
       )}
     </div>
   );

@@ -1,69 +1,84 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import Title from "@/components/Title/Title";
+import React, { useMemo, useState } from "react";
+import ProjectSkeletons from "@/components/skeletons/projectSkeletons";
+import projectImg from "../../assets/BannerImages/Project.jpeg";
+import FilterSection from "../Projects/FilterSection/FilterSection";
+import CommonBanner from "@/components/commonBanner/commonBanner";
+import BlogsCard from "./BlogsCard/BlogsCard";
+import { useGetBlogsQuery } from "@/redux/api/blogApi";
 
-const Blogs = ({ blogs = [] }) => {
+const Blogs = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Utility: strip HTML & limit text
-  const getExcerpt = (html, limit = 100) => {
-    const text = html?.replace(/<[^>]+>/g, "");
-    return text?.length > limit ? text.slice(0, limit) + "..." : text;
-  };
+  const { data, isLoading } = useGetBlogsQuery();
+  const blogs = data?.data || [];
+
+  const [filters, setFilters] = useState({
+    status: "",
+    category: "",
+    sort: "latest",
+  });
+
+  /* -------------------------------
+     Extract unique categories
+  --------------------------------*/
+  const categories = useMemo(() => {
+    const map = new Map();
+    blogs.forEach((b) => {
+      if (b.category) {
+        map.set(b.category.id, b.category.name);
+      }
+    });
+    return Array.from(map, ([id, name]) => ({ id, name }));
+  }, [blogs]);
+
+  /* -------------------------------
+     Filter + Sort blogs
+  --------------------------------*/
+  const filteredBlogs = useMemo(() => {
+    let list = [...blogs];
+
+    if (filters.status) {
+      list = list.filter((b) => b.status === filters.status);
+    }
+
+    if (filters.category) {
+      list = list.filter(
+        (b) => b.category?.id === Number(filters.category)
+      );
+    }
+
+    list.sort((a, b) => {
+      if (filters.sort === "latest") {
+        return new Date(b.published_at) - new Date(a.published_at);
+      }
+      return new Date(a.published_at) - new Date(b.published_at);
+    });
+
+    return list;
+  }, [blogs, filters]);
+
+  if (isLoading) {
+    return <ProjectSkeletons />;
+  }
 
   return (
-    <section className="py-12 max-w-425 mx-auto">
-      <Title name="Our Blogs"/>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {blogs.slice(0, 8).map((blog, index) => (
-          <motion.div
-            key={blog.id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -6 }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden group"
-          >
-            {/* Image Section */}
-            <div className="relative overflow-hidden">
-              <img
-                src={blog.featured_image}
-                alt={blog.title}
-                className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
+    <>
+      <CommonBanner
+        backgroundImage={projectImg}
+        subtitle="Our Insights"
+        title="Blog"
+        highlight="Articles"
+      />
 
-              {/* Date Badge */}
-              <span className="absolute bottom-3 left-3 bg-primary text-white text-xs px-3 py-1 rounded-full shadow">
-                {new Date(blog.published_at).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </span>
-            </div>
+      <FilterSection
+        filters={filters}
+        setFilters={setFilters}
+        categories={categories}
+      />
 
-            {/* Content */}
-            <div className="p-5 flex flex-col">
-              <h3 className="text-lg font-semibold mb-2 line-clamp-2">
-                {blog.title}
-              </h3>
-
-              <p className="text-sm text-gray-600 mb-4">
-                {getExcerpt(blog.content)}
-              </p>
-
-              <Link
-                to={`/blogs/${blog.slug}`}
-                className="mt-auto inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary/90"
-              >
-                Read Full Blog →
-              </Link>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
+      {/* ✅ Pass FILTERED blogs */}
+      <BlogsCard blogs={filteredBlogs} />
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Banner from "./Banner/Banner";
 import aboutBg from "@/assets/BannerImages/About.jpeg";
 import { useGetAboutQuery } from "@/redux/api/aboutApi";
 import Missions from "./Missions/Missions";
@@ -9,6 +8,7 @@ import { useGetHomeMetricsQuery } from "@/redux/api/homeApi";
 import MiniAboutSkeleton from "@/components/skeletons/MiniAboutSkeleton";
 import MiniAbout from "./MiniAbout/MiniAbout";
 import { useGetGalleryImageQuery } from "@/redux/api/galleryApi";
+import CommonBanner from "@/components/commonBanner/commonBanner";
 
 const About = () => {
   const { data: about, isLoading: aboutLoading } = useGetAboutQuery();
@@ -18,7 +18,7 @@ const About = () => {
 
   return (
     <>
-      <Banner
+      <CommonBanner
         backgroundImage={aboutBg}
         subtitle="Our Team"
         title="About Us"

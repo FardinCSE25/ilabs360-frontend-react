@@ -219,12 +219,12 @@ const BannerHome = () => {
 
           {/* Typewriter Effect & Video Button */}
           <div className="flex flex-col md:flex-row md:items-center gap-8 pt-6">
-            <button className="group flex items-center gap-4 font-bold uppercase tracking-[0.2em] text-xs">
+            {/* <button className="group flex items-center gap-4 font-bold uppercase tracking-[0.2em] text-xs">
               <div className="w-14 h-14 rounded-full border border-primary/30 bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 <Play size={24} fill="currentColor" />
               </div>
               VIDEO SHOWCASE
-            </button>
+            </button> */}
 
             <div className="text-primary font-mono text-xl md:text-2xl font-semibold border-l-2 border-primary/20 pl-6">
               <Typewriter

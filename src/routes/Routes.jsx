@@ -7,6 +7,8 @@ import Testimonial from "@/Pages/Testimonial/Testimonial";
 import Contact from "@/Pages/Contact/Contact";
 import Projects from "@/Pages/Projects/Projects";
 import DetailProject from "@/Pages/Projects/DetailProject/DetailProject";
+import Blogs from "@/Pages/Blogs/Blogs";
+import MainBlog from "@/Pages/Blogs/DetBlogs/MainBlog";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ export const router = createBrowserRouter([
       {
         path: "/projects",
         element: <Projects />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/blogs/:slug",
+        element: <MainBlog />,
       },
     ],
   },

@@ -24,6 +24,7 @@ const navItems = [
   { label: "Projects", path: "/projects" },
   { label: "Testimonial", path: "/testimonial" },
   { label: "Contact", path: "/contact" },
+  { label: "Blog", path: "/blogs" },
 ];
 
 const platformIcons = {
@@ -334,7 +335,7 @@ const Navbar = ({ socialLinks = [], settingData }) => {
               })}
             </div>
 
-            {/* CTA Button with Animation */}
+            {/* CTA Button with Animation  */}
             <div className="flex items-center gap-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
