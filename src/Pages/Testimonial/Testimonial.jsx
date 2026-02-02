@@ -1,6 +1,6 @@
 import React from "react";
 import CommonBanner from "@/components/commonBanner/commonBanner";
-import testimonialImg from "../../assets/BannerImages/Testimonial.avif";
+import testimonialImg from "../../assets/BannerImages/Testimonial-Banner.avif";
 import MainTestimonial from "./MainTestimonial/MainTestimonial";
 import ChairmanSpeech from "./ChairmanSpeech/ChairmanSpeech";
 import CommonBannerSkeleton from "@/components/skeletons/commonBannerSkeleton";

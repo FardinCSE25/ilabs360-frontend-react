@@ -27,20 +27,8 @@ const SectionTitle = ({ title, subtitle }) => {
       transition={{ duration: 0.8 }}
       className="mb-16 lg:mb-24 text-center"
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        viewport={{ once: true }}
-        className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/10 to-primary/5 px-4 py-2 rounded-full mb-6 border border-primary/20"
-      >
-        <Heart className="w-4 h-4 text-primary" />
-        <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-          {title}
-        </span>
-      </motion.div>
 
-      <div className="-mb-10">
+      <div className="">
         <Title name="About Us" />
       </div>
 

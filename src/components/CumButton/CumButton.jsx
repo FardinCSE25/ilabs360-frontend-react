@@ -19,7 +19,7 @@ const CumButton = ({ path, title, onClick }) => {
 
   return (
     <motion.div
-      className="mt-10 text-center"
+      className="mt-10 text-center cursor-pointer"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

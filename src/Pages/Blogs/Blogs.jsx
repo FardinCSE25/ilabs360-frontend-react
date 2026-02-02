@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import ProjectSkeletons from "@/components/skeletons/projectSkeletons";
-import projectImg from "../../assets/BannerImages/Project.jpeg";
+import projectImg from "../../assets/BannerImages/Blogs-Banner.avif";
 import FilterSection from "../Projects/FilterSection/FilterSection";
 import CommonBanner from "@/components/commonBanner/commonBanner";
 import BlogsCard from "./BlogsCard/BlogsCard";

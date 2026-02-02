@@ -3,6 +3,7 @@ import Title from "@/components/Title/Title";
 import { Star, Quote, User, Calendar, ChevronRight, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, Link } from "react-router-dom";
+import CumButton from "@/components/CumButton/CumButton";
 
 const TestimonialSection = ({ testimonial }) => {
   const location = useLocation();
@@ -221,13 +222,7 @@ const TestimonialSection = ({ testimonial }) => {
         {/* View All Button (Only on Home Page) */}
         {isHomePage && (
           <div className="text-center mt-12">
-            <Link
-              to="/testimonial"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-            >
-              View All Testimonials
-              <ChevronRight className="w-5 h-5" />
-            </Link>
+            <CumButton path="/testimonial" title="View All Testimonials"/>
           </div>
         )}
       </div>

@@ -16,7 +16,9 @@ const HomeClients = ({ testimonial }) => {
 
   return (
     <section className="py-12">
-      <Title name="Our Clients" />
+      <div className="mb-13">
+        <Title name="Our Clients" />
+      </div>
       <div className="container mx-auto px-4">
         {/* 8-Column Grid Layout */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">

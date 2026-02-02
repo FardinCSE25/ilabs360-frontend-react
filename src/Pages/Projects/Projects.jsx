@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import ProjectSkeletons from "@/components/skeletons/projectSkeletons";
 import CommonBanner from "../../components/commonBanner/commonBanner";
-import projectImg from "../../assets/BannerImages/Project.jpeg";
+import projectImg from "../../assets/BannerImages/Projects-Banner.avif";
 import FilterSection from "./FilterSection/FilterSection";
 import { useGetAllProjectsQuery } from "@/redux/api/projectApi";
 import ProjectsCard from "@/components/ProjectsCard/ProjectsCard";

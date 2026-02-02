@@ -24,7 +24,7 @@ const navItems = [
   { label: "Projects", path: "/projects" },
   { label: "Testimonial", path: "/testimonial" },
   { label: "Contact", path: "/contact" },
-  { label: "Blog", path: "/blogs" },
+  { label: "Blogs", path: "/blogs" },
 ];
 
 const platformIcons = {

@@ -31,7 +31,7 @@ const Tech = () => {
         transition={{ duration: 0.8 }}
       >
         {/* Title */}
-        <div className="-mb-9">
+        <div className="">
           <Title name="Our Technologies" />
         </div>
 
