@@ -78,12 +78,12 @@ const HomeService = ({ services }) => {
                 scale: 1.03,
                 backgroundColor: "rgba(var(--primary-rgb), 0.1)",
               }}
-              className="group flex flex-col items-center justify-center p-10 bg-gray-50 border border-gray-200 rounded-2xl transition-colors duration-300 hover:border-primary/50"
+              className="group flex flex-col items-center justify-center p-10 bg-gray-50 border border-gray-200 md:rounded-2xl rounded-md transition-colors duration-300 hover:border-primary/50"
             >
               {/* Icon Container */}
               <div className="mb-6 relative">
                 <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full group-hover:bg-primary/40 transition-colors" />
-                <div className="relative w-20 h-20 flex items-center justify-center bg-white rounded-2xl border border-primary/30 group-hover:border-primary transition-all duration-300 shadow-sm">
+                <div className="relative w-20 h-20 flex items-center justify-center bg-white md:rounded-2xl rounded-md border border-primary/30 group-hover:border-primary transition-all duration-300 shadow-sm">
                   <FontAwesomeIcon
                     icon={getServiceIcon(service.title)}
                     className="text-3xl text-primary group-hover:scale-110 transition-transform"

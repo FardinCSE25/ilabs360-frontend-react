@@ -29,7 +29,7 @@ export default function MessageSuccess({ show, onClose }) {
             initial={{ scale: 0.8, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.8, opacity: 0, y: 20 }}
-            className="relative overflow-hidden bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl text-center max-w-sm w-full mx-4"
+            className="relative overflow-hidden bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:shadow-2xl text-center max-w-sm w-full mx-4"
           >
             {/* Ambient Glow behind the animation */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full -z-10" />

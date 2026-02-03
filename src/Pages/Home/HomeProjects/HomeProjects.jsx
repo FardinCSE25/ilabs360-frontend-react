@@ -129,7 +129,7 @@ const HomeProjects = ({ projects }) => {
             <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-r from-primary via-transparent to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <motion.div
-              className="relative bg-gradient-to-b from-card via-card/95 to-card/90 rounded-3xl shadow-2xl overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-300 flex flex-col h-full group/card"
+              className="relative bg-gradient-to-b from-card via-card/95 to-card/90 rounded-3xl md:shadow-2xl overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-300 flex flex-col h-full group/card"
               variants={cardVariants}
               whileHover="hover"
               whileTap="tap"

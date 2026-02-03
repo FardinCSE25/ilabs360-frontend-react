@@ -81,7 +81,7 @@ const FeatureCard = ({ feature, index }) => {
       transition={{ delay: index * 0.1, duration: 0.5 }}
       viewport={{ once: true }}
       whileHover={{ x: 6 }}
-      className="flex items-center gap-5 p-5 rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 hover:border-primary/30 transition"
+      className="flex items-center gap-5 p-5 md:rounded-2xl rounded-md bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 hover:border-primary/30 transition"
     >
       <div
         className={`p-3 rounded-xl bg-gradient-to-br ${feature.gradient} text-white`}
@@ -148,7 +148,7 @@ const HomeAbout = ({ title, subtitle, description, image, metrics }) => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle title={title} subtitle={subtitle} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 -mt-20 lg:gap-16 items-start">
           {/* LEFT */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -157,7 +157,7 @@ const HomeAbout = ({ title, subtitle, description, image, metrics }) => {
             viewport={{ once: true }}
             className="relative pt-16"
           >
-            <div className="relative h-[450px] md:h-[550px] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative h-[450px] md:h-[550px] rounded-3xl overflow-hidden md:shadow-2xl">
               <img
                 src={image}
                 alt={title}
@@ -182,7 +182,7 @@ const HomeAbout = ({ title, subtitle, description, image, metrics }) => {
 
             {/* Metrics */}
             <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[95%]">
-              <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow border">
+              <div className="bg-white/90 backdrop-blur-xl md:rounded-2xl rounded-md p-6 shadow border">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {enhancedMetrics.slice(0, 4).map((metric, idx) => (
                     <MetricCard key={idx} metric={metric} index={idx} />

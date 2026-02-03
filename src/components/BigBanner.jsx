@@ -53,7 +53,7 @@ const BigBanner = ({ images = [], loading = false }) => {
         
         <motion.div
           style={{ clipPath, willChange: "clip-path" }}
-          className="relative w-full h-full overflow-hidden bg-white shadow-2xl"
+          className="relative w-full h-full overflow-hidden bg-white md:shadow-2xl"
         >
           {loading ? (
             <LoadingSkeleton />

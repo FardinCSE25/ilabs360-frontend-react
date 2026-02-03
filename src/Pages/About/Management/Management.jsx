@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 const Management = () => {
   const [managementData, setManagementData] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(managementData);
   
 
   useEffect(() => {

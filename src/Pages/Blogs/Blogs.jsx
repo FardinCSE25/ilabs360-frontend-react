@@ -7,7 +7,6 @@ import BlogsCard from "./BlogsCard/BlogsCard";
 import { useGetBlogsQuery } from "@/redux/api/blogApi";
 
 const Blogs = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
 
   const { data, isLoading } = useGetBlogsQuery();
   const blogs = data?.data || [];

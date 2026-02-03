@@ -71,7 +71,7 @@ const MainTestimonial = ({ data }) => {
               className={`
                 relative group bg-white border border-gray-100
                 p-6 sm:p-8 md:p-14
-                rounded-2xl md:rounded-[2rem]
+                md:rounded-2xl rounded-md md:rounded-[2rem]
                 shadow-[0_15px_40px_rgba(0,0,0,0.05)]
                 hover:shadow-[0_35px_70px_rgba(0,0,0,0.1)]
                 transition-all duration-500
@@ -79,7 +79,7 @@ const MainTestimonial = ({ data }) => {
               `}
             >
               {/* Quote Icon */}
-              <div className="absolute -top-4 -left-1 md:-left-6 sm:-top-6 sm:-left-6 w-10 h-10 sm:w-16 sm:h-16 bg-primary rounded-md  sm:rounded-2xl flex items-center justify-center shadow-xl rotate-12 group-hover:rotate-0 transition-transform duration-500">
+              <div className="absolute -top-4 -left-1 md:-left-6 sm:-top-6 sm:-left-6 w-10 h-10 sm:w-16 sm:h-16 bg-primary rounded-md  sm:md:rounded-2xl rounded-md flex items-center justify-center shadow-xl rotate-12 group-hover:rotate-0 transition-transform duration-500">
                 <span className="text-white text-3xl sm:text-4xl font-serif">“</span>
               </div>
 

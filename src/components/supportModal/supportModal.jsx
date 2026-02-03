@@ -30,7 +30,7 @@ const SupportModal = ({ isOpen, onClose, phoneNumber = "+1 234 567 890" }) => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden p-8"
+            className="relative w-full max-w-sm bg-white md:rounded-2xl rounded-md md:shadow-2xl overflow-hidden p-8"
           >
             <button
               onClick={onClose}

@@ -100,7 +100,7 @@ const ProjectsCard = ({ projects }) => {
 
   const renderProjectCard = (project) => (
     <motion.div
-      className="relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-primary/50 transition-all duration-300 flex flex-col h-full group"
+      className="relative bg-white dark:bg-gray-900 md:rounded-2xl rounded-md overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-primary/50 transition-all duration-300 flex flex-col h-full group"
       variants={cardVariants}
       whileHover="hover"
     >
@@ -252,7 +252,7 @@ const ProjectsCard = ({ projects }) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+              className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 md:rounded-2xl rounded-md md:shadow-2xl overflow-hidden flex flex-col"
             >
               {/* Close Button */}
               <button
@@ -425,7 +425,8 @@ const ProjectsCard = ({ projects }) => {
                           View Code
                         </a>
                       )}
-
+                      {/* //TODO: Here when Click in Demo then a video modal should be opened */}
+                      {/* 
                       {selectedProject.project_video && (
                         <a
                           href={selectedProject.project_video}
@@ -436,7 +437,7 @@ const ProjectsCard = ({ projects }) => {
                           <FaPlayCircle />
                           Watch Demo
                         </a>
-                      )}
+                      )} */}
 
                       <Link
                         to={`/projects/${selectedProject.id}`}

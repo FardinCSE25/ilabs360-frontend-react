@@ -101,7 +101,7 @@ const Missions = ({ about, aboutLoading }) => {
                   ? "opacity-100 scale-100 translate-y-0"
                   : "opacity-0 scale-95 translate-y-10"
               }
-              hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/20
+              hover:border-primary/50 hover:md:shadow-2xl hover:shadow-primary/20
               transform hover:-translate-y-2
             `}
           >
@@ -178,7 +178,7 @@ const Missions = ({ about, aboutLoading }) => {
                   ? "opacity-100 scale-100 translate-y-0"
                   : "opacity-0 scale-95 translate-y-10"
               }
-              hover:border-secondary/50 hover:shadow-2xl hover:shadow-secondary/20
+              hover:border-secondary/50 hover:md:shadow-2xl hover:shadow-secondary/20
               transform hover:-translate-y-2
             `}
             style={{

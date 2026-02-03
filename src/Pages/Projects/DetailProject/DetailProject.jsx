@@ -19,7 +19,7 @@ const DetailProject = () => {
   const project = data?.data;
 
   return (
-    <section className="mx-auto px-6 space-y-24">
+    <section className="mx-auto md:px-6 space-y-24">
       {/* About */}
       <AboutDetProject project={project} />
 

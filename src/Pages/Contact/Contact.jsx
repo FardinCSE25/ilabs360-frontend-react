@@ -51,11 +51,16 @@ const Contact = () => {
         title="Lets Connect"
         highlight="Excellence"
       />
+      {settingDataLoading || socialLinksLoading ? (
+        <ContactSectionSkeleton />
+      ) : (
+        <ContactSection
+          settings={settingData}
+          socials={socialLinksData}
+          loading={settingDataLoading || socialLinksLoading}
+        />
+      )}
 
-      <MessageSuccess
-        show={showSuccess}
-        onClose={() => setShowSuccess(false)}
-      />
       {/* CONTACT FORM */}
 
       {contactLoading || !settingData ? (
@@ -75,15 +80,10 @@ const Contact = () => {
           loading={settingDataLoading}
         />
       </div>
-      {settingDataLoading || socialLinksLoading ? (
-        <ContactSectionSkeleton />
-      ) : (
-        <ContactSection
-          settings={settingData}
-          socials={socialLinksData}
-          loading={settingDataLoading || socialLinksLoading}
-        />
-      )}
+      <MessageSuccess
+        show={showSuccess}
+        onClose={() => setShowSuccess(false)}
+      />
     </div>
   );
 };

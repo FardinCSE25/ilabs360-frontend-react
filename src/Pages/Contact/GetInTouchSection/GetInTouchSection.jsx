@@ -55,7 +55,7 @@ const GetInTouchSection = ({ onSubmit, loading, settings }) => {
       </div>
 
       <div className="container mx-auto md:px-6 relative z-10">
-        <div className="bg-white md:rounded-[40px] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-100">
+        <div className="bg-white md:rounded-[40px] md:shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-100">
           {/* LEFT — FORM SIDE */}
           <div className="lg:w-3/5 p-8 md:p-16 lg:p-20">
             <header className="mb-12">
@@ -230,7 +230,7 @@ const GetInTouchSection = ({ onSubmit, loading, settings }) => {
               <div className="space-y-10">
                 {/* Phone Card */}
                 <div className="flex gap-6 group">
-                  <div className="w-14 h-14 shrink-0 border border-white/10 rounded-2xl flex items-center justify-center bg-white/5 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+                  <div className="w-14 h-14 shrink-0 border border-white/10 md:rounded-2xl rounded-md flex items-center justify-center bg-white/5 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
                     <Phone
                       size={22}
                       className="text-primary group-hover:text-white transition-colors"
@@ -251,7 +251,7 @@ const GetInTouchSection = ({ onSubmit, loading, settings }) => {
 
                 {/* Email Card */}
                 <div className="flex gap-6 group">
-                  <div className="w-14 h-14 shrink-0 border border-white/10 rounded-2xl flex items-center justify-center bg-white/5 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+                  <div className="w-14 h-14 shrink-0 border border-white/10 md:rounded-2xl rounded-md flex items-center justify-center bg-white/5 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
                     <Mail
                       size={22}
                       className="text-primary group-hover:text-white transition-colors"
@@ -272,7 +272,7 @@ const GetInTouchSection = ({ onSubmit, loading, settings }) => {
 
                 {/* Location Card */}
                 <div className="flex gap-6 group">
-                  <div className="w-14 h-14 shrink-0 border border-white/10 rounded-2xl flex items-center justify-center bg-white/5 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+                  <div className="w-14 h-14 shrink-0 border border-white/10 md:rounded-2xl rounded-md flex items-center justify-center bg-white/5 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
                     <MapPin
                       size={22}
                       className="text-primary group-hover:text-white transition-colors"

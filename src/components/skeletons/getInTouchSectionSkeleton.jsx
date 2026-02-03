@@ -5,7 +5,7 @@ const GetInTouchSectionSkeleton = () => {
   return (
     <section className="relative py-24 bg-[#faf9f6] overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="bg-white rounded-[40px] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-200">
+        <div className="bg-white rounded-[40px] md:shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-200">
 
           {/* LEFT — FORM SKELETON */}
           <div className="lg:w-3/5 p-8 md:p-16 lg:p-20">
@@ -53,7 +53,7 @@ const GetInTouchSectionSkeleton = () => {
             <div className="space-y-10">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="flex gap-6 items-center">
-                  <Skeleton className="h-14 w-14 rounded-2xl bg-gray-700" />
+                  <Skeleton className="h-14 w-14 md:rounded-2xl rounded-md bg-gray-700" />
                   <div className="space-y-3">
                     <Skeleton className="h-3 w-24 bg-gray-600" />
                     <Skeleton className="h-5 w-40 bg-gray-500" />

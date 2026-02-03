@@ -92,7 +92,7 @@ const ChairmanSpeech = ({ data }) => {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-4 sm:border-8 border-white"
+              className="relative rounded-xl sm:md:rounded-2xl rounded-md overflow-hidden md:shadow-2xl border-4 sm:border-8 border-white"
             >
               <img
                 src={data?.image}

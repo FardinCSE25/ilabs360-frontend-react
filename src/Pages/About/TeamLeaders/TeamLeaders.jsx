@@ -130,7 +130,7 @@ const TeamLeaders = ({ profiles = [] }) => {
           ></div>
 
           {/* Modal Container */}
-          <div className="relative w-full max-w-5xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in duration-200">
+          <div className="relative w-full max-w-5xl max-h-[90vh] bg-white dark:bg-gray-900 md:rounded-2xl rounded-md md:shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in duration-200">
             {/* Close Button */}
             <button 
               onClick={() => setSelectedProfile(null)}

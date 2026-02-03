@@ -118,7 +118,7 @@ export const VideoModal = ({ videoData, onNext, onPrev, onClose }) => {
       <div className="absolute inset-0 z-0" onClick={onClose} />
 
       <div 
-        className={`relative w-full aspect-video bg-black shadow-2xl z-10 group transition-all duration-300 ${
+        className={`relative w-full aspect-video bg-black md:shadow-2xl z-10 group transition-all duration-300 ${
             isFullscreen ? "max-w-full h-screen" : "max-w-5xl mx-4"
         }`}
         onClick={(e) => e.stopPropagation()}

@@ -108,7 +108,7 @@ const CommonMap = ({ google_map_embed, loading }) => {
           <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-tr from-blue-500/10 to-teal-500/10 rounded-full blur-3xl -z-10"></div>
 
           {/* Map Frame */}
-          <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/30 border border-gray-700/50">
+          <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 md:rounded-2xl rounded-md overflow-hidden md:shadow-2xl shadow-blue-900/30 border border-gray-700/50">
             {/* Frame top bar */}
             <div className="h-12 bg-gradient-to-r from-gray-800 to-gray-900 border-b border-gray-700/50 flex items-center px-6">
               <div className="flex gap-2">

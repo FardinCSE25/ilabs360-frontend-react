@@ -56,7 +56,7 @@ const BigBannerBackup = ({ images = [], loading = false }) => {
             willChange: "clip-path"
           }}
           // The lg: clipPath override in CSS if you want to be specific for desktop
-          className="relative w-full h-full overflow-hidden bg-white shadow-2xl"
+          className="relative w-full h-full overflow-hidden bg-white md:shadow-2xl"
         >
           <Carousel
             plugins={[autoplay.current]}

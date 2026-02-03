@@ -26,7 +26,7 @@ const ContactSectionSkeleton = () => {
               {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-4 p-5 rounded-2xl border border-gray-200 bg-white"
+                  className="flex items-center gap-4 p-5 md:rounded-2xl rounded-md border border-gray-200 bg-white"
                 >
                   <Skeleton className="h-10 w-10 rounded-full bg-gray-300" />
                   <div className="space-y-2">
@@ -58,7 +58,7 @@ const ContactSectionSkeleton = () => {
             </div>
 
             {/* Floating Card */}
-            <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-2xl shadow-xl hidden md:block space-y-2">
+            <div className="absolute -bottom-6 -right-6 bg-white p-8 md:rounded-2xl rounded-md shadow-xl hidden md:block space-y-2">
               <Skeleton className="h-6 w-24 bg-gray-300" />
               <Skeleton className="h-3 w-32 bg-gray-200" />
             </div>

@@ -101,7 +101,7 @@ const TestimonialSection = ({ testimonial }) => {
         {/* Stats Banner (Only on Home Page) */}
         {isHomePage && (
           <div className="mb-12">
-            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6 md:p-8">
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 md:rounded-2xl rounded-md p-6 md:p-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">98%</div>
@@ -246,7 +246,7 @@ const TestimonialSection = ({ testimonial }) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden"
+              className="relative w-full max-w-2xl bg-white dark:bg-gray-900 md:rounded-2xl rounded-md md:shadow-2xl overflow-hidden"
             >
               {/* Close Button */}
               <button

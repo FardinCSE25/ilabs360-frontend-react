@@ -23,7 +23,7 @@ export const VideoCard = ({ videoId, title, onClick, duration = "2:30" }) => {
         setIsMuted(true);
       }}
       onClick={onClick}
-      className="relative rounded-2xl overflow-hidden cursor-pointer bg-black aspect-video group shadow-2xl"
+      className="relative md:rounded-2xl rounded-md overflow-hidden cursor-pointer bg-black aspect-video group md:shadow-2xl"
     >
       {/* Video Preview with Enhanced Controls */}
       <div className="relative w-full h-full">
@@ -104,7 +104,7 @@ export const VideoCard = ({ videoId, title, onClick, duration = "2:30" }) => {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-blue-500/20 rounded-2xl blur-xl"
+          className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-blue-500/20 md:rounded-2xl rounded-md blur-xl"
         />
       )}
     </motion.div>

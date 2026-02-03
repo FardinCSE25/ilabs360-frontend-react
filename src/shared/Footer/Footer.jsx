@@ -98,10 +98,11 @@ const Footer = ({ data, socialLinksData }) => {
             <ul className="space-y-2">
               {[
                 { name: "Home", path: "/" },
-                { name: "About Us", path: "/about" },
+                { name: "About", path: "/about" },
+                { name: "Projects", path: "/projects" },
+                { name: "Testimonial", path: "/testimonial" },
                 { name: "Contact", path: "/contact" },
-                { name: "Privacy Policy", path: "/privacy" },
-                { name: "Terms of Service", path: "/terms" },
+                { name: "Blogs", path: "/blogs" },
               ].map((item, index) => (
                 <li key={index}>
                   <Link
@@ -163,7 +164,8 @@ const Footer = ({ data, socialLinksData }) => {
               (text) => (
                 <Link
                   key={text}
-                  to={`/${text.toLowerCase().replace(" ", "-")}`}
+                  // to={`/${text.toLowerCase().replace(" ", "-")}`}
+                  to='/contact'
                   className="text-secondary-foreground/50 hover:text-primary transition-colors"
                 >
                   {text}
@@ -176,7 +178,7 @@ const Footer = ({ data, socialLinksData }) => {
             <p>
               Developed with ❤️ by{" "}
               <Link
-                to="/dashboard"
+                to="http://admin.ilabs360.com/"
                 className="text-primary hover:underline font-medium"
                 target="_blank"
               >

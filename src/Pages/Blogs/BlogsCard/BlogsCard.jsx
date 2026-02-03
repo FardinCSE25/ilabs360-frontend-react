@@ -72,7 +72,7 @@ const BlogsCard = ({ blogs = [] }) => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -4 }}
               onClick={() => handleBlogClick(blog)}
-              className={`bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-pointer ${
+              className={`bg-white md:rounded-2xl rounded-md shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-pointer ${
                 isHomePage ? "cursor-pointer" : ""
               }`}
             >
@@ -169,7 +169,7 @@ const BlogsCard = ({ blogs = [] }) => {
               className="fixed inset-0 z-50 flex items-center justify-center p-4"
             >
               <div 
-                className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+                className="bg-white md:rounded-2xl rounded-md max-w-4xl w-full max-h-[90vh] overflow-hidden md:shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Modal Header */}

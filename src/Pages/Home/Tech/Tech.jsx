@@ -102,7 +102,7 @@ const Tech = () => {
                       whileHover={{ scale: 1.2, zIndex: 10 }}
                     >
                       <motion.div
-                        className="w-28 h-28 rounded-2xl flex items-center justify-center shadow-xl"
+                        className="w-28 h-28 md:rounded-2xl rounded-md flex items-center justify-center shadow-xl"
                         style={{
                           backgroundColor: item.hexCode
                             ? `${item.hexCode}33`
@@ -141,7 +141,7 @@ const Tech = () => {
               transition={{ delay: index * 0.05 }}
             >
               <motion.div
-                className="tech-card w-24 h-24 md:w-28 md:h-28 flex items-center justify-center rounded-2xl shadow-lg bg-secondary/10 backdrop-blur-sm border border-white/5"
+                className="tech-card w-24 h-24 md:w-28 md:h-28 flex items-center justify-center md:rounded-2xl rounded-md shadow-lg bg-secondary/10 backdrop-blur-sm border border-white/5"
                 style={{
                   boxShadow: `0 10px 30px -10px ${item.hexCode || "#ffffff"}50`,
                 }}

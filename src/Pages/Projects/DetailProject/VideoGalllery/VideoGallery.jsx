@@ -133,7 +133,7 @@ const VideoGallery = ({ videoId, title = "Project Walkthrough", duration = "3:45
               stiffness: 300,
               damping: 25 
             }}
-            className="relative cursor-pointer rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 bg-gradient-to-br from-gray-900 to-black group"
+            className="relative cursor-pointer rounded-3xl overflow-hidden md:shadow-2xl border-2 border-white/20 bg-gradient-to-br from-gray-900 to-black group"
           >
             {/* Video Thumbnail with Parallax Effect */}
             <motion.div 
@@ -198,7 +198,7 @@ const VideoGallery = ({ videoId, title = "Project Walkthrough", duration = "3:45
                 {/* Main Button */}
                 <motion.div
                   whileHover={{ scale: 1.1 }}
-                  className="relative w-24 h-24 rounded-full bg-gradient-to-r from-primary to-blue-500 flex items-center justify-center shadow-2xl"
+                  className="relative w-24 h-24 rounded-full bg-gradient-to-r from-primary to-blue-500 flex items-center justify-center md:shadow-2xl"
                 >
                   <Play className="w-10 h-10 text-white ml-2" />
                 </motion.div>
@@ -314,7 +314,7 @@ const VideoGallery = ({ videoId, title = "Project Walkthrough", duration = "3:45
             <motion.div
               key={index}
               whileHover={{ y: -10 }}
-              className="p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-100 text-center"
+              className="p-6 md:rounded-2xl rounded-md bg-white/50 backdrop-blur-sm border border-gray-100 text-center"
             >
               <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary/10 to-blue-500/10 flex items-center justify-center mx-auto mb-4">
                 <Video className="w-6 h-6 text-primary" />

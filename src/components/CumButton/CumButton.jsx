@@ -6,7 +6,7 @@ const CumButton = ({ path, title, onClick }) => {
   const ButtonContent = (
     <motion.button
       type="button"
-      className="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-2xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+      className="px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white md:rounded-2xl rounded-md font-bold shadow-xl hover:md:shadow-2xl transition-all duration-300 relative overflow-hidden group"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}

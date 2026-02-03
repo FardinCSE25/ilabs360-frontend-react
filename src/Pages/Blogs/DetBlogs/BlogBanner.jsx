@@ -7,7 +7,7 @@ const BlogBanner = ({ blog }) => {
   if (!blog) return null;
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden mt-36">
       {/* Back Navigation */}
       <div className="absolute top-6 left-6 z-20">
         <Link

@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
 const MiniAbout = ({ about, metrics = [] }) => {
-    console.log(about);
-    
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [animatedValues, setAnimatedValues] = useState({});
@@ -71,12 +69,12 @@ const MiniAbout = ({ about, metrics = [] }) => {
                 rotateY: mousePos.x * 10,
                 rotateX: -mousePos.y * 10,
               }}
-              className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100"
+              className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden md:shadow-2xl border border-slate-100"
             >
               <motion.div
                 animate={{ scale: [1, 1.1, 1], x: [0, -10, 0], y: [0, -5, 0] }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="w-full h-[260px] sm:h-[360px] md:h-[440px]"
+                className="w-full h-[260px] sm:h-[360px] md:h-[600px]"
               >
                 <img
                   src={about.data[0].banner}
@@ -86,7 +84,7 @@ const MiniAbout = ({ about, metrics = [] }) => {
               </motion.div>
 
               {/* Glass Badge */}
-              <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 p-4 md:p-6 backdrop-blur-md bg-white/10 border border-white/20 rounded-xl md:rounded-2xl">
+              <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 p-4 md:p-6 backdrop-blur-md bg-white/10 border border-white/20 rounded-xl md:md:rounded-2xl rounded-md">
                 <div className="flex items-center gap-3 md:gap-4">
                   <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-lg flex items-center justify-center text-white">
                     <svg
@@ -154,7 +152,7 @@ const MiniAbout = ({ about, metrics = [] }) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.4 + index * 0.1 }}
-                  className="bg-slate-50 border border-slate-100 p-4 md:p-6 rounded-xl md:rounded-2xl group hover:bg-primary transition-colors"
+                  className="bg-slate-50 border border-slate-100 p-4 md:p-6 rounded-xl md:md:rounded-2xl rounded-md group hover:bg-primary transition-colors"
                 >
                   <h3 className="text-2xl md:text-3xl font-bold text-slate-900 group-hover:text-white">
                     {animatedValues[item.id] || 0}

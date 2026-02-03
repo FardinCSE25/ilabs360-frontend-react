@@ -45,8 +45,8 @@ const Navbar = ({ socialLinks = [], settingData }) => {
   const [hoveredNav, setHoveredNav] = useState(null);
 
   const location = useLocation();
-  const projectMatch = useMatch("/project/:id");
-
+  const projectMatch = useMatch("/projects/*");
+  const blogMatch = useMatch("/blogs/*");
   const getPlatformIcon = (platform) => {
     const key = platform?.toLowerCase();
     return platformIcons[key] || <div className="w-4 h-4" />;
@@ -76,7 +76,7 @@ const Navbar = ({ socialLinks = [], settingData }) => {
       <SupportModal
         isOpen={callOpen}
         onClose={() => setCallOpen(false)}
-        phoneNumber={settingData?.data[0]?.primary_phone || "01872175065"}
+        phoneNumber={settingData?.primary_phone || "01309176398"}
       />
 
       {/* Animated Top Bar with Particle Effect */}
@@ -156,69 +156,68 @@ const Navbar = ({ socialLinks = [], settingData }) => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: isVisible ? 0 : -100 }}
-        transition={{ 
-          duration: 0.6, 
+        transition={{
+          duration: 0.6,
           ease: [0.23, 1, 0.32, 1],
           type: "spring",
           stiffness: 100,
-          damping: 20
+          damping: 20,
         }}
         className={`fixed top-10 left-0 right-0 z-[90] transition-all duration-500 ${
-          isScrolled 
-            ? "bg-white/95 backdrop-blur-md shadow-2xl shadow-primary/10 py-2" 
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md md:shadow-2xl shadow-primary/10 py-2"
             : "bg-transparent py-4"
         }`}
       >
         <div className="max-w-[1700px] mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* Animated iLabs360 Logo */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="relative group"
-            >
+            <motion.div whileHover={{ scale: 1.05 }} className="relative group">
               <NavLink to="/" className="relative block">
                 {/* Glow Effect */}
                 <motion.div
-                  animate={{ 
+                  animate={{
                     opacity: [0.3, 0.6, 0.3],
-                    scale: [1, 1.05, 1]
+                    scale: [1, 1.05, 1],
                   }}
-                  transition={{ 
-                    duration: 3, 
+                  transition={{
+                    duration: 3,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
-                  className="absolute -inset-4 bg-primary/10 blur-xl rounded-2xl -z-10"
+                  className="absolute -inset-4 bg-primary/10 blur-xl md:rounded-2xl rounded-md -z-10"
                 />
-                
+
                 {/* Logo Container */}
                 <div className="relative flex items-center gap-3">
                   {/* Animated 'i' Character */}
                   <motion.div
-                    animate={{ 
+                    animate={{
                       y: [0, -4, 0],
-                      scale: [1, 1.1, 1]
+                      scale: [1, 1.1, 1],
                     }}
-                    transition={{ 
-                      duration: 2, 
+                    transition={{
+                      duration: 2,
                       repeat: Infinity,
-                      ease: "easeInOut"
+                      ease: "easeInOut",
                     }}
                     className="relative"
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center">
-                      <span className="text-primary-foreground font-black text-lg">i</span>
+                      <span className="text-primary-foreground font-black text-lg">
+                        i
+                      </span>
                     </div>
                     <motion.div
-                      animate={{ 
+                      animate={{
                         scale: [1, 1.5, 1],
-                        opacity: [0.5, 0.8, 0.5]
+                        opacity: [0.5, 0.8, 0.5],
                       }}
-                      transition={{ 
-                        duration: 2, 
+                      transition={{
+                        duration: 2,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        delay: 0.5
+                        delay: 0.5,
                       }}
                       className="absolute top-0 right-0 w-2 h-2 rounded-full bg-primary blur-sm"
                     />
@@ -233,14 +232,14 @@ const Navbar = ({ socialLinks = [], settingData }) => {
                     >
                       Labs
                     </motion.span>
-                    
+
                     {/* Animated Underline */}
                     <motion.div
                       animate={{ width: ["0%", "100%", "0%"] }}
-                      transition={{ 
-                        duration: 3, 
+                      transition={{
+                        duration: 3,
                         repeat: Infinity,
-                        ease: "easeInOut"
+                        ease: "easeInOut",
                       }}
                       className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary via-secondary to-primary"
                     />
@@ -248,26 +247,28 @@ const Navbar = ({ socialLinks = [], settingData }) => {
 
                   {/* '360' Badge */}
                   <motion.div
-                    animate={{ 
+                    animate={{
                       rotate: [0, 360],
-                      scale: [1, 1.1, 1]
+                      scale: [1, 1.1, 1],
                     }}
-                    transition={{ 
+                    transition={{
                       duration: 20,
                       repeat: Infinity,
-                      ease: "linear"
+                      ease: "linear",
                     }}
                     className="relative"
                   >
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-primary/30 flex items-center justify-center border border-primary/20">
-                      <span className="text-lg font-black text-primary">360°</span>
+                      <span className="text-lg font-black text-primary">
+                        360°
+                      </span>
                     </div>
                     <motion.div
                       animate={{ rotate: -360 }}
-                      transition={{ 
+                      transition={{
                         duration: 15,
                         repeat: Infinity,
-                        ease: "linear"
+                        ease: "linear",
                       }}
                       className="absolute inset-0 rounded-full border border-primary/30 border-dashed"
                     />
@@ -279,8 +280,10 @@ const Navbar = ({ socialLinks = [], settingData }) => {
             {/* Desktop Navigation with Hover Effects */}
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item, index) => {
-                const isActive = location.pathname === item.path || 
-                               (item.path === "/projects" && projectMatch);
+                const isActive =
+                  location.pathname === item.path ||
+                  (item.path === "/projects" && projectMatch) ||
+                  (item.path === "/blogs" && blogMatch);
                 return (
                   <motion.div
                     key={item.path}
@@ -295,36 +298,38 @@ const Navbar = ({ socialLinks = [], settingData }) => {
                       to={item.path}
                       className={`
                         relative px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-all duration-300
-                        ${isActive 
-                          ? "text-primary" 
-                          : isScrolled 
-                            ? "text-foreground/70 hover:text-primary" 
-                            : "text-foreground/80 hover:text-primary"
+                        ${
+                          isActive
+                            ? "text-primary"
+                            : isScrolled
+                              ? "text-foreground/70 hover:text-primary"
+                              : "text-foreground/80 hover:text-primary"
                         }
                       `}
                     >
                       {item.label}
-                      
+
                       {/* Hover/Active Indicator */}
                       <motion.div
                         initial={false}
-                        animate={{ 
-                          width: hoveredNav === index || isActive ? "100%" : "0%",
-                          opacity: hoveredNav === index || isActive ? 1 : 0
+                        animate={{
+                          width:
+                            hoveredNav === index || isActive ? "100%" : "0%",
+                          opacity: hoveredNav === index || isActive ? 1 : 0,
                         }}
                         className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary"
                       />
-                      
+
                       {/* Glowing Dot for Active */}
                       {isActive && (
                         <motion.div
-                          animate={{ 
+                          animate={{
                             scale: [1, 1.5, 1],
-                            opacity: [0.5, 1, 0.5]
+                            opacity: [0.5, 1, 0.5],
                           }}
-                          transition={{ 
-                            duration: 2, 
-                            repeat: Infinity 
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
                           }}
                           className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary blur-sm"
                         />
@@ -344,9 +349,10 @@ const Navbar = ({ socialLinks = [], settingData }) => {
                 className={`
                   hidden lg:flex items-center gap-2 px-6 py-3 rounded-full font-bold 
                   transition-all duration-300 relative overflow-hidden group
-                  ${isScrolled 
-                    ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30" 
-                    : "bg-gradient-to-r from-primary/90 to-secondary/90 text-white shadow-xl shadow-primary/40"
+                  ${
+                    isScrolled
+                      ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30"
+                      : "bg-gradient-to-r from-primary/90 to-secondary/90 text-white shadow-xl shadow-primary/40"
                   }
                 `}
               >
@@ -357,21 +363,21 @@ const Navbar = ({ socialLinks = [], settingData }) => {
                   transition={{ duration: 0.6 }}
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                 />
-                
+
                 <Phone size={18} className="relative z-10" />
                 <span className="relative z-10 text-sm uppercase tracking-wider">
                   Get Quote
                 </span>
-                
+
                 {/* Pulsing Animation */}
                 <motion.div
-                  animate={{ 
+                  animate={{
                     scale: [1, 1.2, 1],
-                    opacity: [0.5, 0.8, 0.5]
+                    opacity: [0.5, 0.8, 0.5],
                   }}
-                  transition={{ 
-                    duration: 2, 
-                    repeat: Infinity 
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
                   }}
                   className="absolute inset-0 rounded-full border-2 border-primary/30"
                 />
@@ -384,9 +390,10 @@ const Navbar = ({ socialLinks = [], settingData }) => {
                 onClick={() => setIsOpen(true)}
                 className={`
                   lg:hidden p-3 rounded-xl transition-all duration-300 relative overflow-hidden
-                  ${isScrolled 
-                    ? "bg-primary/10 text-primary" 
-                    : "bg-primary/20 text-primary"
+                  ${
+                    isScrolled
+                      ? "bg-primary/10 text-primary"
+                      : "bg-primary/20 text-primary"
                   }
                 `}
               >
@@ -415,25 +422,27 @@ const Navbar = ({ socialLinks = [], settingData }) => {
               className="fixed inset-0  z-[95] backdrop-blur-md"
               onClick={() => setIsOpen(false)}
             />
-            
+
             {/* Sidebar */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ 
-                type: "spring", 
-                damping: 25, 
+              transition={{
+                type: "spring",
+                damping: 25,
                 stiffness: 200,
-                mass: 0.8 
+                mass: 0.8,
               }}
-              className="fixed top-0 right-0 h-screen w-[90%] max-w-md bg-gradient-to-b from-background via-background to-primary/5 z-[100] p-8 flex flex-col shadow-2xl shadow-primary/20"
+              className="fixed top-0 right-0 h-screen w-[90%] max-w-md bg-gradient-to-b from-background via-background to-primary/5 z-[100] p-8 flex flex-col md:shadow-2xl shadow-primary/20"
             >
               {/* Header */}
               <div className="flex justify-between items-center mb-12 pt-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                    <span className="text-primary-foreground font-black text-xl">i</span>
+                    <span className="text-primary-foreground font-black text-xl">
+                      i
+                    </span>
                   </div>
                   <div>
                     <h2 className="text-2xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -468,23 +477,26 @@ const Navbar = ({ socialLinks = [], settingData }) => {
                         onClick={() => setIsOpen(false)}
                         className={`
                           flex items-center justify-between p-4 rounded-xl transition-all duration-300 group
-                          ${isActive 
-                            ? "bg-gradient-to-r from-primary/10 to-secondary/10 border-l-4 border-primary" 
-                            : "hover:bg-primary/5"
+                          ${
+                            isActive
+                              ? "bg-gradient-to-r from-primary/10 to-secondary/10 border-l-4 border-primary"
+                              : "hover:bg-primary/5"
                           }
                         `}
                       >
                         <div className="flex items-center gap-4">
                           <motion.div
-                            animate={{ 
+                            animate={{
                               rotate: isActive ? 360 : 0,
-                              scale: isActive ? 1.2 : 1
+                              scale: isActive ? 1.2 : 1,
                             }}
-                            className={`p-2 rounded-lg ${isActive ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}`}
+                            className={`p-2 rounded-lg ${isActive ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}
                           >
                             <ChevronRight size={18} />
                           </motion.div>
-                          <span className={`text-xl font-semibold ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                          <span
+                            className={`text-xl font-semibold ${isActive ? "text-primary" : "text-foreground"}`}
+                          >
                             {item.label}
                           </span>
                         </div>
@@ -532,7 +544,7 @@ const Navbar = ({ socialLinks = [], settingData }) => {
                       href={social.url}
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      transition={{ delay: 0.5 + (index * 0.1) }}
+                      transition={{ delay: 0.5 + index * 0.1 }}
                       whileHover={{ scale: 1.2, rotate: 5 }}
                       className="p-3 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 text-foreground hover:text-primary transition-all"
                     >
@@ -558,7 +570,7 @@ const Navbar = ({ socialLinks = [], settingData }) => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1 }}
         onClick={() => setCallOpen(true)}
-        className="fixed bottom-6 right-6 lg:hidden z-[85] p-4 bg-gradient-to-r from-primary to-secondary rounded-full shadow-2xl shadow-primary/40"
+        className="fixed bottom-6 right-6 lg:hidden z-[85] p-4 bg-gradient-to-r from-primary to-secondary rounded-full md:shadow-2xl shadow-primary/40"
       >
         <Phone size={24} className="text-white" />
         <motion.div

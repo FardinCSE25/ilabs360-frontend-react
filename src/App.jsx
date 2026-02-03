@@ -18,7 +18,7 @@ const App = () => {
       {/* GLOBAL PAGE LOADER */}
       {/* <PageLoader /> */}
 
-      <Navbar />
+      <Navbar socialLinksData={socialLinksData} settingData={data}  />
 
       {/* MAIN CONTENT */}
       <main className="flex-1">

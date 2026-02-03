@@ -149,12 +149,12 @@ const DetBlogs = ({ blog }) => {
           initial={{ opacity: 0, y: -20, x: 20 }}
           animate={{ opacity: 1, y: 0, x: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="fixed top-6 right-6 z-40"
+          className="fixed top-50 right-6 z-40"
         >
           <div className="relative">
             <button
               onClick={() => setLanguage(language === "english" ? "bangla" : "english")}
-              className="flex items-center gap-2 bg-white shadow-xl rounded-full px-4 py-3 border border-gray-200 hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+              className="flex items-center gap-2 bg-white shadow-xl rounded-full px-4 py-3 border border-gray-200 hover:md:shadow-2xl hover:scale-105 transition-all duration-300 group"
             >
               <Globe className="w-5 h-5 text-primary group-hover:rotate-180 transition-transform duration-500" />
               <span className="text-sm font-medium text-gray-800">
@@ -279,7 +279,7 @@ const DetBlogs = ({ blog }) => {
 
           {/* Table of Contents */}
           {tableOfContents.length > 0 && (
-            <div className="mb-12 p-6 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-200 shadow-sm">
+            <div className="mb-12 p-6 bg-gradient-to-r from-gray-50 to-white md:rounded-2xl rounded-md border border-gray-200 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2z"/>
@@ -342,12 +342,12 @@ const DetBlogs = ({ blog }) => {
 
               {/* Additional Spacing for better readability */}
               {getSummaryForLanguage() && (
-                <div className="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-2xl">
+                <div className="mt-12 p-6 bg-blue-50 border border-blue-200 md:rounded-2xl rounded-md">
                   <h4 className="text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
-                    {language === "english" ? "Key Takeaways" : "প্রধান বিষয়বস্তু"}
+                    {language === "english" ? "Summary" : "সামারি"}
                   </h4>
                   <div 
                     className={`text-blue-800 ${language === "bangla" ? 'bangla-font' : ''}`}

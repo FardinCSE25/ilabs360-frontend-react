@@ -51,7 +51,7 @@ const AboutDetProject = ({ project }) => {
   };
 
   return (
-    <section className="relative max-w-7xl mx-auto py-32 px-6 overflow-hidden mt-16">
+    <section className="relative max-w-7xl mx-auto py-32 md:px-6 overflow-hidden mt-16">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
@@ -93,7 +93,7 @@ const AboutDetProject = ({ project }) => {
               stiffness: 200,
               damping: 25,
             }}
-            className="relative overflow-hidden rounded-2xl shadow-2xl border border-gray-100/50 bg-gradient-to-br from-white to-gray-50"
+            className="relative overflow-hidden md:rounded-2xl rounded-md md:shadow-2xl border border-gray-100/50 bg-gradient-to-br from-white to-gray-50"
           >
             {/* Shine Overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -101,7 +101,7 @@ const AboutDetProject = ({ project }) => {
             <img
               src={project.banner}
               alt={project.project_name}
-              className="w-full h-[550px] object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+              className="w-full md:h-[550px] object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
             />
 
             {/* Gradient Overlay */}
@@ -122,7 +122,7 @@ const AboutDetProject = ({ project }) => {
           <motion.div
             variants={floatVariants}
             animate="float"
-            className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100"
+            className="absolute -bottom-6 -left-6 bg-white p-4 md:rounded-2xl rounded-md md:shadow-2xl border border-gray-100"
           >
             <Zap size={24} className="text-yellow-500" />
           </motion.div>
@@ -131,7 +131,7 @@ const AboutDetProject = ({ project }) => {
             variants={floatVariants}
             animate="float"
             style={{ animationDelay: "1s" }}
-            className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100"
+            className="absolute -top-6 -right-6 bg-white p-4 md:rounded-2xl rounded-md md:shadow-2xl border border-gray-100"
           >
             <Target size={24} className="text-red-500" />
           </motion.div>
@@ -180,7 +180,7 @@ const AboutDetProject = ({ project }) => {
             {/* Project Title with Gradient Highlight */}
             <h1 className="text-5xl md:text-7xl font-black text-gray-900 leading-tight tracking-tight">
               <span className="relative">
-                <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
+                <span className="relative z-10 pl-2 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
                   {project.project_name}
                 </span>
                 <motion.span
@@ -202,7 +202,7 @@ const AboutDetProject = ({ project }) => {
             {project.short_description && (
               <motion.div variants={itemVariants} className="relative">
                 <div className="absolute -left-6 top-1/2 transform -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-primary to-blue-500 rounded-full" />
-                <p className="text-xl text-gray-600 leading-relaxed font-light pl-8 border-l-2 border-gray-100">
+                <p className="text-xl text-gray-600 leading-relaxed font-light pl-2 md:pl-8 border-l-2 border-gray-100">
                   {project.short_description}
                 </p>
               </motion.div>
@@ -302,9 +302,9 @@ const AboutDetProject = ({ project }) => {
             {(project.client_name || project.client_company) && (
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl border border-gray-100 shadow-lg cursor-pointer"
+                className="group relative bg-gradient-to-br from-white to-gray-50 p-6 md:rounded-2xl rounded-md border border-gray-100 shadow-lg cursor-pointer"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 md:rounded-2xl rounded-md transition-opacity duration-300" />
                 <div className="relative flex items-center gap-4">
                   <motion.div
                     whileHover={{ rotate: 360 }}
@@ -341,7 +341,7 @@ const AboutDetProject = ({ project }) => {
                   boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl font-bold overflow-hidden shadow-2xl"
+                className="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white md:rounded-2xl rounded-md font-bold overflow-hidden md:shadow-2xl"
               >
                 {/* Animated Background */}
                 <motion.div
@@ -367,7 +367,7 @@ const AboutDetProject = ({ project }) => {
                     repeat: Infinity,
                     repeatDelay: 1,
                   }}
-                  className="absolute inset-0 bg-gradient-to-r from-primary to-blue-500 rounded-2xl"
+                  className="absolute inset-0 bg-gradient-to-r from-primary to-blue-500 md:rounded-2xl rounded-md"
                 />
 
                 <span className="relative z-10 flex items-center gap-2">

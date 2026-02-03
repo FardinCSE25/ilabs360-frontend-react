@@ -98,7 +98,7 @@ const ContactSection = ({ settings, socials }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group flex items-start sm:items-center p-4 md:p-5 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all" // Updated background
+              className="group flex items-start sm:items-center p-4 md:p-5 md:rounded-2xl rounded-md bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all" // Updated background
             >
               <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                 {item.icon}
@@ -144,7 +144,7 @@ const ContactSection = ({ settings, socials }) => {
         {/* Decorative Background Frame */}
         <div className="absolute -inset-2 md:-inset-4 rounded-3xl translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4 z-0" />
         
-        <div className="relative z-10 overflow-hidden rounded-2xl shadow-xl w-full aspect-[4/5] md:aspect-[3/4] group"> {/* Shadow softened */}
+        <div className="relative z-10 overflow-hidden md:rounded-2xl rounded-md shadow-xl w-full aspect-[4/5] md:aspect-[3/4] group"> {/* Shadow softened */}
           
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -168,7 +168,7 @@ const ContactSection = ({ settings, socials }) => {
         <motion.div 
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-4 -right-2 sm:-right-6 md:-right-8 bg-primary px-4 py-3 md:px-8 md:py-5 rounded-xl md:rounded-2xl shadow-lg z-20" /* Shadow softened */
+          className="absolute -bottom-4 -right-2 sm:-right-6 md:-right-8 bg-primary px-4 py-3 md:px-8 md:py-5 rounded-xl md:md:rounded-2xl rounded-md shadow-lg z-20" /* Shadow softened */
         >
           <p className="text-white font-bold text-sm md:text-xl leading-none">Available</p> {/* Changed to white text */}
           <p className="text-white/90 text-[8px] md:text-[10px] uppercase tracking-widest font-black mt-1">
